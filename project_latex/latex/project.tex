@@ -1,0 +1,142 @@
+%**********
+% Preamble
+%**********
+\documentclass[11pt]{report}
+
+% Set packages to be used (most should be included in your LaTeX installation; the rest are locally defined)
+\usepackage{amsmath,amsfonts,amsthm,../styles/commands,graphicx,../styles/project}
+% amsmath      : Provides enhanced functionality for mathematical formulas
+%                ftp://ftp.ams.org/ams/doc/amsmath/amsldoc.pdf
+% amsfonts     : Provides additional mathematical fonts
+%                ftp://ftp.ams.org/pub/tex/doc/amsfonts/amsfndoc.pdf
+% amsthm       : Provides enhanced commands for theorem-like environments
+%                ftp://ftp.ams.org/ams/doc/amscls/amsthdoc.pdf
+% commands     : Provides short-cut commands (locally defined)
+% graphicx     : Provides enhanced support for graphics
+%                http://en.wikibooks.org/wiki/LaTeX/Importing_Graphics#The_graphicx_package
+% project      : Provides project format (locally defined)
+% Other packages you may want to consider:
+% amssymb, hyperref, longtable, natbib, rotating
+
+%**********
+% Document
+%**********
+\begin{document}
+
+%************
+% Title page
+%************
+\author{Xi He}
+\title {This is Title.}
+
+%*************
+% Figure List
+%*************
+%\figurespagefalse % Uncomment if you do not have figures
+
+%************
+% Table List
+%************
+%\tablespagefalse % Uncomment if you do not have tables
+
+%*********
+% Preface
+%*********
+\preface
+
+%*********
+% Chapter
+%*********
+\chapter{Introduction}
+
+The introduction should include a description of the project and a summary of the contents of the report.  In particular, it should provide a high-level description of the algorithms you have implemented, the challenges that you faced, and the highlights of your numerical experiments.  The introduction should include \emph{minimal} mathematical detail, if any at all.
+
+The remaining chapters in this template suggest a way to format your report.  However, if you use this template, then you are not required to structure the report in the way that is outlined here.  Please feel free to change the names of chapters and/or organize your report differently.
+
+%*********
+% Chapter
+%*********
+\chapter{Algorithm Descriptions}
+
+This chapter may discuss the algorithms that you have implemented, with comments on their similarities and differences.  For the reader's convenience, it may be useful to organize your discussion into sections, as suggested here.
+
+This chapter may include a citation, say to the textbook.  A citation is created in the following way: ``Please see \cite{NoceWrig06} for further details.''  The first time that you compile this template, you will most likely find that the citation appears only as a question mark and no entry is created in the Bibliography page later on.  This is because, when compiling a \LaTeX\ document with a bibliography section, you need to run \texttt{bibtex} to generate the necessary bibliography files.  (You should be able to do this easily using your \LaTeX\ IDE.)  Once this is done, then after you compile your code again, the citation should appear as a numbered reference to an entry in the Bibliography section of the report.  (Note that you may need to run \texttt{bibtex} and compile your code a few times each in order for everything to sync correctly.)
+
+%*********
+% Section
+%*********
+\section{Line Search Methods}
+
+This section may summarize the line search methods that you have implemented.  Most likely, this will involve writing one or more equations.  You can write equations in-line, such as $Ax=b$, or you can write them as displayed equations, such as
+\bequationn
+  Ax = b
+\eequationn
+or, perhaps better yet, as
+\bequation\label{linearsystem}
+  Ax = b.
+\eequation
+Note that if you write the equation in the latter manner, then by using the \texttt{$\backslash$label} command, you can easily refer to this equation anywhere else in your document.  You refer to an equation like this: ``Equation~\eqref{linearsystem} has zero, one, or infinitely many solutions.''  If you create more equations before and/or after the one above, then \LaTeX\ will automatically renumber all of the equations so that they are in chronological order, and will update the references accordingly.  This is much easier than having to update equation number references manually, and reduces errors.
+
+%*********
+% Section
+%*********
+\section{Trust Region Methods}\label{trustregion}
+
+This section may summarize the trust region methods that you have implemented.  This may or may not involve providing one or more figures to illustrate the methods.  An example format for a figure can be seen in the \LaTeX\ code for producing Figure~\ref{logo} below.
+
+\bfigure[ht]
+  \centering
+  \includegraphics[height=1in]{../images/lehigh}
+  \caption{Lehigh University logo}
+  \label{logo}
+\efigure
+
+Note that it is important to provide a useful caption for the figure.  Moreover, we again provide a label so that if we want to refer to the figure anywhere else in the report, we can do so easily.
+
+%*********
+% Chapter
+%*********
+\chapter{Numerical Results}
+
+This section may include tables, say of input parameter values and/or the results of your experiments.  An example table is the following.
+
+\btable[ht]
+  \centering
+  \btabular{|r|l|}
+    \hline
+    7C0         & hexadecimal \\
+    \cline{2-2}
+    3700        & octal       \\
+    \cline{2-2}
+    11111000000 & binary      \\
+    \hline
+    \hline
+    1984        & decimal     \\
+    \hline
+  \etabular
+  \caption{The number 1984 written in various numerical bases}
+  \label{1984}
+\etable
+
+%*********
+% Chapter
+%*********
+\chapter{Conclusion}
+
+The conclusion should summarize the findings described in the report.
+
+%**************
+% Bibliography
+%**************
+\bibliographystyle{plain}
+\bibliography{../references/references}
+
+%**********
+% Appendix
+%**********
+\appendix
+\chapter{Mathematical Details}\label{appendix}
+
+The appendix may be used to include mathematical detail that is not necessary to include in the main body of the report.  It may also be used to provide the reader with instructions on running your code.  (Do NOT copy-and-paste your actual Matlab code in this document.)  If you do not need an appendix, then please erase this section in the \LaTeX\ code so this text does not appear.
+
+\end{document}

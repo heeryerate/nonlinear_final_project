@@ -1,0 +1,11 @@
+\contentsline {chapter}{Table of Contents}{ii}
+\contentsline {chapter}{List of Tables}{iii}
+\contentsline {chapter}{List of Figures}{iv}
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {chapter}{\numberline {2}Algorithm Descriptions}{2}
+\contentsline {section}{\numberline {2.1}Line Search Methods}{2}
+\contentsline {section}{\numberline {2.2}Trust Region Methods}{2}
+\contentsline {chapter}{\numberline {3}Numerical Results}{4}
+\contentsline {chapter}{\numberline {4}Conclusion}{5}
+\contentsline {chapter}{Bibliography}{6}
+\contentsline {chapter}{\numberline {A}Mathematical Details}{7}
