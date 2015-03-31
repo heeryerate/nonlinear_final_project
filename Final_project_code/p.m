@@ -1,6 +1,4 @@
-function qq = p(a,b)
-    
-    if ~exit(a,'var'), a = 1; end;
-    b = 2;
-
-end
+xmin=0.8
+xmax=4
+n=20
+x=xmin+rand(1)*(xmax-xmin)

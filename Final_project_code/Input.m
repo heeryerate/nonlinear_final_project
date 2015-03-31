@@ -5,67 +5,35 @@ classdef Input < handle
     properties (SetAccess = public)
         f                       % function handle
         x                       % initial iteration
-        n_v                     % number of variables
+        numv                     % number of variables
         opttol                  % optimality tolerance
         maxiter                 % iteration limit
-        Trust_c1                % trust region radius update parameter
-        Trust_c2                % trust region radius update parameter
+        c1tr               % trust region radius update parameter
+        c2tr                % trust region radius update parameter
         algorithm               % Algorithm
-        CG_opttol               % CG optimality tolerance
-        CG_maxiter              % CG iteration limit
-        Linesearch_c1           % Armijo line search conditions parameter
-        Linesearch_c2           % curvature line search conditions parameter
-        SR1_update_tol          % tolerance for SR1 Hessian approximation updates
-        BFGS_update_tol         % tolerance for BFGS Hessian approximation updates
+        cgopttol               % CG optimality tolerance
+        cgmaxiter              % CG iteration limit
+        c1ls           % Armijo line search conditions parameter
+        c2ls           % curvature line search conditions parameter
+        sr1updatetol          % tolerance for SR1 Hessian approximation updates
+        bfgsupdatetol         % tolerance for BFGS Hessian approximation updates
     end
     
     % Class methods
     methods
         % Constructor
-        function i = Input(dirname)
-            % Assert that problem function directory has been provided as a string
-            assert(ischar(dirname),'Optsolver: Problem set folder, dirname, must be specified as a string.');
-            
-            % Print directory
-            fprintf('Optsolver: Adding to path the directory "%s"\n',dirname);
-            
-            % Add problem function directory to path
-            addpath(dirname);
-            
-            % Assert that slqpgs_inputs.m exists in problem function directory
-            problem_dir = dir(sprintf('./%s',dirname));
-            
-            problem = {};
-            num_var = {};
-            for k = 4:length(problem_dir)
-                name = problem_dir(k).name(1:end-2);
-                problem{k-3} = name;
-                num_var{k-3} = str2num(name(regexp(name,'\d')));
-                assert(exist(sprintf('%s/%s.m',dirname,problem{k-3}),'file')~=0,sprintf('Optsolver: Problem input file, %s, does not exist.',sprintf('%s/%s.m',dirname,problem{k-3})));
-            end
-%             i.f = problem;
-%             i.n_v = num_var
-            
-            fprintf('Optsolver: There are %i problems in problem set folder "./%s"\n', length(problem), dirname);
-            fprintf('Optsolver: The %i problem handles are:', length(problem));
-            for k = 1:length(problem)
-                fprintf(' %i:"%s" ',k,problem{k});
-            end
-            fprintf('\n')
-            
-            % Assert that problem function has been specified
-            optfunction = 'Input number of function handle: ';
-            n = input(optfunction);
-            in.f = problem{n};
-            in.n_v = num_var{n};
+        function i = Input(para)
+       
+            assert(exist(sprintf('problem_set/%s.m', para.f),'file')~=0,sprintf('Optsolver: Problem input file, %s, does not exist.',sprintf('problem_set/%s.m',para.f)));
+            i.f = para.f
             
             % Set problem function handle
             assert(isfield(in,'f') & ischar(in.f),'Optsolver: Problem functions handle, i.f, must be specified as a string.');
             i.f = in.f;
             
             % Set problem size
-            assert(isfield(in,'n_v') & i.isscalarinteger(in.n_v),'Optsolver: Number of variables, i.n_v, must be specified as a scalar integer.');
-            i.n_v = in.n_v;
+            assert(isfield(in,'numv') & i.isscalarinteger(in.numv),'Optsolver: Number of variables, i.numv, must be specified as a scalar integer.');
+            i.numv = in.numv;
             
             % Print inputs file
             fprintf('Optsolver: Loading inputs from "./%s.m"\n','input_parameters');
@@ -81,29 +49,29 @@ classdef Input < handle
             if isfield(in,'maxiter'), i.maxiter = in.maxiter; else i.maxiter = 1e+03; end;
             
             % Set Armijo and curvature line search conditions parameters 
-            assert(isfield(in,'Linesearch_c1') & i.isproperparameter(in.Linesearch_c1),'Optsolver: Armijo line search parameter, i.Linesearch_c1, must be specified as a real number in interval (0,1)')
-            assert(isfield(in,'Linesearch_c2') & i.isproperparameter(in.Linesearch_c2),'Optsolver: curvature line search parameter, i.Linesearch_c2, must be specified as a real number in interval (0,1)')
-            assert(in.Linesearch_c1 < in.Linesearch_c2, 'Optsolver: Armijo line search parameter, i.Linesearch_c1, must be less than curvature line search parameter i.Linesearch_c2')
-            i.Linesearch_c1 = in.Linesearch_c1;
-            i.Linesearch_c2 = in.Linesearch_c2;
+            assert(isfield(in,'c1ls') & i.isproperparameter(in.c1ls),'Optsolver: Armijo line search parameter, i.c1ls, must be specified as a real number in interval (0,1)')
+            assert(isfield(in,'c2ls') & i.isproperparameter(in.c2ls),'Optsolver: curvature line search parameter, i.c2ls, must be specified as a real number in interval (0,1)')
+            assert(in.c1ls < in.c2ls, 'Optsolver: Armijo line search parameter, i.c1ls, must be less than curvature line search parameter i.c2ls')
+            i.c1ls = in.c1ls;
+            i.c2ls = in.c2ls;
 
             % Set trust region radius update parameters
-            assert(isfield(in,'Trust_c1') & i.isproperparameter(in.Trust_c1),'Optsolver: the first trust region radius update parameter, i.Trust_c1, must be specified as a real number in interval (0,1)')
-            assert(isfield(in,'Trust_c2') & i.isproperparameter(in.Trust_c2),'Optsolver: the second trust region radius update parameter, i.Trust_c2, must be specified as a real number in interval (0,1)')
-            assert(in.Trust_c1 < in.Trust_c2, 'Optsolver: the first trust region radius update parameter, i.Trust_c1, must be less than the second trust region radius update parameter i.Trust_c2')
-            i.Trust_c1 = in.Trust_c1;
-            i.Trust_c2 = in.Trust_c2;
+            assert(isfield(in,'c1tr          ') & i.isproperparameter(in.c1tr  ),'Optsolver: the first trust region radius update parameter, i.c1tr  , must be specified as a real number in interval (0,1)')
+            assert(isfield(in,'c2tr') & i.isproperparameter(in.c2tr),'Optsolver: the second trust region radius update parameter, i.c2tr, must be specified as a real number in interval (0,1)')
+            assert(in.c1tr   < in.c2tr, 'Optsolver: the first trust region radius update parameter, i.c1tr    , must be less than the second trust region radius update parameter i.c2tr')
+            i.c1tr   = in.c1tr    ;
+            i.c2tr = in.c2tr;
 
             % Set CG optimality tolerance and iteration limit
-            if isfield(in,'CG_opttol'), i.CG_opttol = in.CG_opttol; else i.CG_opttol = 1e-06; end;
-            if isfield(in,'CG_maxiter'), i.CG_maxiter = in.CG_maxiter; else i.CG_maxiter = 1e+03; end;
+            if isfield(in,'cgopttol'), i.cgopttol = in.cgopttol; else i.cgopttol = 1e-06; end;
+            if isfield(in,'cgmaxiter'), i.cgmaxiter = in.cgmaxiter; else i.cgmaxiter = 1e+03; end;
 
             % Set tolerance for SR1 and BFGS Hessian approximation updates
-            if isfield(in,'SR1_update_tol'), i.SR1_update_tol = in.SR1_update_tol; else i.SR1_update_tol = 1e-04; end;
-            if isfield(in,'BFGS_update_tol'), i.BFGS_update_tol = in.BFGS_update_tol; else i.BFGS_update_tol = 1e-04; end;
+            if isfield(in,'sr1updatetol'), i.sr1updatetol = in.sr1updatetol; else i.sr1updatetol = 1e-04; end;
+            if isfield(in,'bfgsupdatetol'), i.bfgsupdatetol = in.bfgsupdatetol; else i.bfgsupdatetol = 1e-04; end;
                         
             % Assert that initial point has been specified
-            assert(isfield(in,'x') & length(in.x) == i.n_v,'Optsolver: Initial point, i.x, must be specified as a vector of length n_v');
+            assert(isfield(in,'x') & length(in.x) == i.numv,'Optsolver: Initial point, i.x, must be specified as a vector of length numv');
             
             % Set initial point
             i.x = in.x;
