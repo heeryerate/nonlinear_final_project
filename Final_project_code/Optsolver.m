@@ -1,32 +1,17 @@
-% Optsolver: 
-function x = Optsolver(p, x, a, i)
+% Global solver Optsolver 
+function [x,k] = Optsolver(p, x, a, i)
+  tic
+  % Add problem_set, algorithm_set and searching_set to the search path
   addpath('./problem_set','./Algorithm_set','./searching_set');
+  
+  % Set default parameters
+  default;
+
+  % Check if all the input variables are valid and analyze those variables
   [p,alg,sea] = Checkvars(p,x,a,i);
-  x = Optimizer(p,alg,sea,i);
+  
+  % Output the optimal solution found and iterations
+  [x,k] = Optimizer(p,alg,sea,x,i);
+  fprintf('CPU time: %.4f\t',toc)
 end
   
-function x = Optimizer(p,alg,sea,i)
-    % Initialize iteration counter
-    k = 0;
-
-    % Evaluate objective function
-    f = feval(p,x,0);
-
-    % Evaluate objective gradient
-    g = feval(p,x,1);
-
-    % Evaluate inital gradient norm
-    normsg0 = norm(g);
-
-    while ~Termination(p,x,normg0,i)
-        if sea ~= 'cg' & sea ~= 'sr1cg'
-            d = feval(alg,p,x,d,i);
-            alpha = feval(sea,p,i);
-            update();
-        else
-            [d,alpha] = feval(sea,p,i);
-            trustregion(sea,p,i);
-            update();
-        end
-    end
-end

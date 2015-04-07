@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex project"] 1426884235 "project.aux" "project.bbl" "project" 1426894216
+["bibtex project"] 1428077935 "project.aux" "project.bbl" "project" 1428077938
   "../references/references.bib" 1333490994 265 6bcc228e91da57f0584defceedd8df76 ""
   "/usr/local/texlive/2014/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "project.aux" 1426894215 1670 17d055bf9653f99735cf6c4c83c154b4 ""
+  "project.aux" 1428077937 1670 17d055bf9653f99735cf6c4c83c154b4 ""
   "project.bcf" 0 -1 0 ""
   (generated)
   "project.blg"
   "project.bbl"
-["pdflatex"] 1426894215 "project.tex" "project.pdf" "project" 1426894216
+["pdflatex"] 1428077936 "project.tex" "project.pdf" "project" 1428077938
   "../images/lehigh.jpg" 1312921268 29824 f4296abd0b465086375bb5bb0e7babe2 ""
   "../styles/commands.sty" 1322520012 4127 15a27fe516fd6118b0d081cfa0843425 ""
   "../styles/project.sty" 1426857654 1386 2d8ec424b193cc7f623dd26ebda3d7b2 ""
@@ -44,16 +44,16 @@
   "/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/grfext.sty" 1335995445 7075 bd0c34fbf1ae8fd1debd2a554e41b2d5 ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty" 1335995445 22417 c74ff4af6a1aa2b65d1924020edbbe11 ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/pdftex-def/pdftex.def" 1306616590 55368 3c8a0d99822330f2dfabc0dfb09ce897 ""
-  "project.aux" 1426894215 1670 17d055bf9653f99735cf6c4c83c154b4 ""
-  "project.bbl" 1426884236 243 b7dac1640242bef20bb0677498e45145 "bibtex project"
-  "project.lof" 1426894215 183 6a8d41d6754a752d9fa9780deccd7e42 ""
-  "project.lot" 1426894215 210 0945622d03dd6374927476412cdbb9d3 ""
-  "project.tex" 1426894214 6272 b2b5d3e8ab7c4a4b53be411c4a043abb ""
-  "project.toc" 1426894215 610 ca0d39fa06b5a03c304d059fee093223 ""
+  "project.aux" 1428077937 1670 17d055bf9653f99735cf6c4c83c154b4 ""
+  "project.bbl" 1428077936 243 b7dac1640242bef20bb0677498e45145 "bibtex project"
+  "project.lof" 1428077937 183 6a8d41d6754a752d9fa9780deccd7e42 ""
+  "project.lot" 1428077937 210 0945622d03dd6374927476412cdbb9d3 ""
+  "project.tex" 1428077933 6271 7c3d3621d96684a76cb070efefbf5982 ""
+  "project.toc" 1428077937 610 ca0d39fa06b5a03c304d059fee093223 ""
   (generated)
   "project.lof"
-  "project.aux"
   "project.log"
-  "project.lot"
   "project.toc"
+  "project.lot"
+  "project.aux"
   "project.pdf"

@@ -1,45 +1,40 @@
-function [a,f] = linesearch(p,x,f,d,D,o)
-
-% function [a,f] = linesearch(p,x,f,d,D,o)
-%
-% Author      : Frank E. Curtis
-% Description : Line search subroutines for steepestdescent.m.
-% Input       : p ~ problem function handle
-%               x ~ point
-%               f ~ function value
-%               d ~ search direction
-%               D ~ directional derivative value
-%               o ~ line search option
-% Output      : a ~ step size
-%               f ~ updated function value
-% Revised by  : (your name here)
-
-% Unit step lengths
-if strcmp(o,'unit') == 1
-  
-  % Evaluate unit steplength
-  a = 1;
-
-  % Evaluate function value
-  f = feval(p,x+a*d,0);
-  
-elseif strcmp(o,'backtrack') == 1
-  
-  % IMPLEMENT BACKTRACKING LINE SEARCH HERE
-  
-else
-  
-  % IMPLEMENT WOLFE LINE SEARCH HERE
-  
+function d = cg(g,i,D,H);
+    d = zeros(size(g));
+    r = H*d+g;
+    p = -r;
+    k = 0;
+    while k<i.cgmaxiter
+        if p'*H*p < 0
+            a = Findroot(d,p,D);
+            d = d + a*p;
+            break;
+        else
+            a = (r'*r)/(p'*H'*p);
+        end
+        
+        if norm(d+a*p) > D
+            a = Findroot(d,p,D);
+            d = d + a*p;
+            break;
+        else
+            d = d + a*p;
+            rr = r'*r;
+            r = r + a*H*p;
+        end
+        
+        if norm(r) <= 1e-6
+            d = d + a*p;
+            break;
+        else
+            beta = (r'*r)/rr;
+            p = -r + beta*p;
+        end
+        k = k + 1;
+    end
 end
 
-function a = zoom()
-
-% function a = zoom()
-%
-% Author      : (your name here)
-% Description : Zoom function for Wolfe line search.
-% Input       : 
-% Output      : a ~ step length
-
-% IMPLEMENT ZOOM FUNCTION HERE
+function a = Findroot(d,p,D)
+    b1 = p'*p;
+    b2 = p'*d;
+    a = (sqrt(b2^2-b1*(d'*d-D^2))-b2)/b1;
+end

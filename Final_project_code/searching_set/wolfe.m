@@ -1,45 +1,56 @@
-function [a,f] = linesearch(p,x,f,d,D,o)
+function a = wolfe(p,x,d,i)
+  a0 = 0;
+  a1 = 1e-2;
+  amax = 1;
+  count = 0;
+  while count < i.maxiter
+    count = count + 1;
+    if phi(p,x,d,a1) > phi(p,x,d,0) + i.c1ls*a1*gphi(p,x,d,0) ...
+            | (phi(p,x,d,a1) >= phi(p,x,d,a0) & count>1)
+      a = zoom(p,x,d,i,a0,a1);
+      break;
+    end
 
-% function [a,f] = linesearch(p,x,f,d,D,o)
-%
-% Author      : Frank E. Curtis
-% Description : Line search subroutines for steepestdescent.m.
-% Input       : p ~ problem function handle
-%               x ~ point
-%               f ~ function value
-%               d ~ search direction
-%               D ~ directional derivative value
-%               o ~ line search option
-% Output      : a ~ step size
-%               f ~ updated function value
-% Revised by  : (your name here)
+    if abs(gphi(p,x,d,a1)) <= -i.c2ls*gphi(p,x,d,0)
+      a = a1;
+      break;
+    end
 
-% Unit step lengths
-if strcmp(o,'unit') == 1
-  
-  % Evaluate unit steplength
-  a = 1;
-
-  % Evaluate function value
-  f = feval(p,x+a*d,0);
-  
-elseif strcmp(o,'backtrack') == 1
-  
-  % IMPLEMENT BACKTRACKING LINE SEARCH HERE
-  
-else
-  
-  % IMPLEMENT WOLFE LINE SEARCH HERE
-  
+    if gphi(p,x,d,a1) >= 0
+      a = zoom(p,x,d,i,a1,a0);
+      break;
+    end
+    
+    a0 = a1;
+    a1 = a1+rand(1)*(amax-a1);
+  end
 end
 
-function a = zoom()
+function azoom = zoom(p,x,d,i,alow,ahigh)
+    while 1
+        amid = (alow+ahigh)/2;
+        if phi(p,x,d,amid) > phi(p,x,d,0) + i.c1ls*amid*gphi(p,x,d,0)...
+                | phi(p,x,d,amid) >= phi(p,x,d,alow)
+            ahigh = amid;
+        else
+            if gphi(p,x,d,amid) <= -i.c2ls*gphi(p,x,d,0)
+                azoom = amid;
+                break;
+            end
+            if gphi(p,x,d,amid)*(ahigh-alow) >= 0
+                ahigh = alow;
+            end
+            alow = amid;
+        end
+    end
+end
 
-% function a = zoom()
-%
-% Author      : (your name here)
-% Description : Zoom function for Wolfe line search.
-% Input       : 
-% Output      : a ~ step length
+function phivalue = phi(p,x,d,a)
+  res = x+a*d;
+  phivalue = feval(p,res,0);
+end
 
-% IMPLEMENT ZOOM FUNCTION HERE
+function gphivalue = gphi(p,x,d,a)
+  res = x+a*d;
+  gphivalue = feval(p,res,1)'*d;
+end
