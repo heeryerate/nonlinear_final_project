@@ -1,15 +1,15 @@
 # Fdb version 3
-["bibtex project"] 1428077935 "project.aux" "project.bbl" "project" 1428077938
+["bibtex project"] 1428903430 "project.aux" "project.bbl" "project" 1428903462
   "../references/references.bib" 1333490994 265 6bcc228e91da57f0584defceedd8df76 ""
   "/usr/local/texlive/2014/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "project.aux" 1428077937 1670 17d055bf9653f99735cf6c4c83c154b4 ""
+  "project.aux" 1428903461 3062 e843d05354b8718b8338f0c9f8c059ca ""
   "project.bcf" 0 -1 0 ""
   (generated)
   "project.blg"
   "project.bbl"
-["pdflatex"] 1428077936 "project.tex" "project.pdf" "project" 1428077938
-  "../images/lehigh.jpg" 1312921268 29824 f4296abd0b465086375bb5bb0e7babe2 ""
-  "../styles/commands.sty" 1322520012 4127 15a27fe516fd6118b0d081cfa0843425 ""
+["pdflatex"] 1428903460 "project.tex" "project.pdf" "project" 1428903462
+  "../images/global_min.png" 1428891112 97384 3ab417f16421ecefd11050c5f21ea8b1 ""
+  "../styles/commands.sty" 1428901604 4407 68401fbea311480545b0e61bd4fc2e0a ""
   "../styles/project.sty" 1426857654 1386 2d8ec424b193cc7f623dd26ebda3d7b2 ""
   "/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/local/texlive/2014/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1284331290 1458 43ab4710dc82f3edeabecd0d099626b2 ""
@@ -44,16 +44,16 @@
   "/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/grfext.sty" 1335995445 7075 bd0c34fbf1ae8fd1debd2a554e41b2d5 ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty" 1335995445 22417 c74ff4af6a1aa2b65d1924020edbbe11 ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/pdftex-def/pdftex.def" 1306616590 55368 3c8a0d99822330f2dfabc0dfb09ce897 ""
-  "project.aux" 1428077937 1670 17d055bf9653f99735cf6c4c83c154b4 ""
-  "project.bbl" 1428077936 243 b7dac1640242bef20bb0677498e45145 "bibtex project"
-  "project.lof" 1428077937 183 6a8d41d6754a752d9fa9780deccd7e42 ""
-  "project.lot" 1428077937 210 0945622d03dd6374927476412cdbb9d3 ""
-  "project.tex" 1428077933 6271 7c3d3621d96684a76cb070efefbf5982 ""
-  "project.toc" 1428077937 610 ca0d39fa06b5a03c304d059fee093223 ""
+  "project.aux" 1428903461 3062 e843d05354b8718b8338f0c9f8c059ca ""
+  "project.bbl" 1428903431 49 0eba253fc001332e731e8aba3f23127b "bibtex project"
+  "project.lof" 1428903461 233 d7c4a62172eea517e7164fb0e0679ab8 ""
+  "project.lot" 1428903461 615 accef295d7aaecf41072d092432a29fb ""
+  "project.tex" 1428903460 20661 9974baf2821ab42b6e9e7c93d4cc8a1e ""
+  "project.toc" 1428903461 1102 add309b9785a9781feef20599ab0164a ""
   (generated)
-  "project.lof"
+  "project.lot"
+  "project.pdf"
   "project.log"
   "project.toc"
-  "project.lot"
+  "project.lof"
   "project.aux"
-  "project.pdf"

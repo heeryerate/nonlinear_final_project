@@ -2,10 +2,16 @@
 \contentsline {chapter}{List of Tables}{iii}
 \contentsline {chapter}{List of Figures}{iv}
 \contentsline {chapter}{\numberline {1}Introduction}{1}
-\contentsline {chapter}{\numberline {2}Algorithm Descriptions}{2}
-\contentsline {section}{\numberline {2.1}Line Search Methods}{2}
-\contentsline {section}{\numberline {2.2}Trust Region Methods}{2}
-\contentsline {chapter}{\numberline {3}Numerical Results}{4}
-\contentsline {chapter}{\numberline {4}Conclusion}{5}
-\contentsline {chapter}{Bibliography}{6}
-\contentsline {chapter}{\numberline {A}Mathematical Details}{7}
+\contentsline {chapter}{\numberline {2}Fundamentals of Unconstrained Optimization}{3}
+\contentsline {chapter}{\numberline {3}Algorithm Descriptions I: Flexible Step Method}{5}
+\contentsline {section}{\numberline {3.1}Steepest Descent and Newton method}{5}
+\contentsline {section}{\numberline {3.2}Line Search Methods}{5}
+\contentsline {section}{\numberline {3.3}Quasi-newton method}{5}
+\contentsline {chapter}{\numberline {4}Algorithm Descriptions II: Restricted Step Methods.}{6}
+\contentsline {section}{\numberline {4.1}Trust Region Method}{6}
+\contentsline {section}{\numberline {4.2}Conjugate Gradient Method}{6}
+\contentsline {section}{\numberline {4.3}Trust Region Subproblem}{6}
+\contentsline {chapter}{\numberline {5}Numerical Results}{7}
+\contentsline {chapter}{\numberline {6}Conclusion}{10}
+\contentsline {chapter}{Bibliography}{11}
+\contentsline {chapter}{\numberline {A}Mathematical Details}{12}
