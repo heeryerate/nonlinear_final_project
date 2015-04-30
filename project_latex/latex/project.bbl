@@ -1,3 +1,9 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{NoceWrig06}
+J.~Nocedal and S.~J. Wright.
+\newblock {\em {Numerical Optimization}}.
+\newblock Springer Series in Operations Research. Springer, New York, NY, USA,
+  2nd edition, 2006.
 
 \end{thebibliography}

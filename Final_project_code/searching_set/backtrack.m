@@ -1,27 +1,56 @@
-function a = backtrack(p,x,d,i) 
-  a0 = 1;
-  a = 0;
-  rho = 0.5;
-  count = 0;
-  while 1
+function [a,g] = backtrack(p,x,d,f,g,H,i)
+
+% function a = backtrack(p,x,d,f,g,H,i)
+%
+% Author      : Xi He
+% Description : Calculate step-size along a descent direction d
+% Input       : p ~ problem handle
+%               x ~ current point
+%               d ~ current descent direction
+%               i ~ parameter set
+% Output      : a ~ step-size along a descent direction
+
+% Set initial step-size
+a0 = 1;
+
+% Initialize step-size to zero
+a = 0;
+
+% Scalers to decrease step-size
+rho = i.shrinkbacktrack;
+
+% Set count of iteration
+count = 0;
+
+gphi0 = g'*d;
+
+while 1
+    % Increment iteration counter
     count = count + 1;
-    if phi(p,x,d,a0) <= phi(p,x,d,0) + i.c1ls*a*gphi(p,x,d,0);
+    
+    % Check the first condition
+    if phi(p,x,d,a0) <= f + i.c1ls*a*gphi0;
+        
+        % If the condition is satisfied, accept step-size
         a = a0;
         break;
     end
+    
+    % Otherwise, reject and shrink step-size
     a0 = rho*a0;
-  end
+end
+g = feval(p,x+a*d,1);
+global COUNTG;
+COUNTG = COUNTG + 1;
 end
 
 function phivalue = phi(p,x,d,a)
-  res = x+a*d;
-  phivalue = feval(p,res,0);
+
+% Increment global counter
+global COUNTF;
+COUNTF = COUNTF + 1;
+
+% Calculate objective function value
+res = x+a*d;
+phivalue = feval(p,res,0);
 end
-
-function gphivalue = gphi(p,x,d,a)
-  res = x+a*d;
-  gphivalue = feval(p,res,1)'*d;
-end
-
-
-

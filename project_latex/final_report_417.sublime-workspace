@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"shrink",
+				"shrinkbacktrack"
+			],
+			[
+				"Co",
+				"COUNTsr1H"
+			],
+			[
+				"COUNT",
+				"COUNTH"
+			],
+			[
 				"s",
 				"s"
 			],
@@ -207,15 +219,65 @@
 			"file": "latex/project.tex",
 			"settings":
 			{
-				"buffer_size": 6271,
+				"buffer_size": 31607,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/Users/Heerye/Dropbox/2015spring/martin/asyncocoa/asyncocoa.tex",
+			"contents": "Searching 39 files for \"COUNTG\"\n\n/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/default.m:\n   62  \n   63  % Number of gradient value evaluation\n   64: global COUNTG;\n   65  \n   66  % Number of Hessian evaluation\n   ..\n   69  % Set all count number to be zero\n   70  COUNTF = 0;\n   71: COUNTG = 0;\n   72  COUNTH = 0;\n\n/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/MrEleven.m:\n   40  % Update global count number\n   41  global COUNTF;\n   42: global COUNTG;\n   43  COUNTF = COUNTF + 1;\n   44: COUNTG = COUNTG + 1;\n   45  \n   46  % Evaluate objective function\n   ..\n  110  \n  111  % Update global count number\n  112: global COUNTG;\n  113: COUNTG = COUNTG + 1;\n  114  \n  115  % Evaluate function gradient\n\n/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/MrEleven.m~:\n   40  % Update global count number\n   41  global COUNTF;\n   42: global COUNTG;\n   43  COUNTF = COUNTF + 1;\n   44: COUNTG = COUNTG + 1;\n   45  \n   46  % Evaluate objective function\n   ..\n  109  \n  110  % Update global count number\n  111: global COUNTG;\n  112: COUNTG = COUNTG + 1;\n  113  \n  114  % Evaluate function gradient\n\n/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/runner.m:\n   10   % State global count number\n   11  global COUNTF;\n   12: global COUNTG;\n   13  global COUNTH;\n   14  \n   ..\n   28      [d,k] = MrEleven(problem,x,algs{p},i);\n   29  \n   30:     %disp(sprintf('%-20s&\\t$%-10.3e$&\\t$%-5i$&   $%-8.4f$&$%-5i$&$%-5i$&$%-5i$\\t    \\\\\\\\',algs{p},norm(feval(problem,d,1)),k,toc,COUNTF,COUNTG,COUNTH));\n   31:     disp(sprintf('%-19s%-11.3e%-7i%-10.4f(%i,%i,%i)\\t',algs{p},norm(feval(problem,d,1)),k,toc,COUNTF,COUNTG,COUNTH));\n   32:     %fprintf(resdis,'%-19s%-11.3e%-7i%-10.4f(%i,%i,%i)\\t\\n',algs{p},norm(feval(problem,d,1)),k,toc,COUNTF,COUNTG,COUNTH);\n   33  end\n   34  fclose('all');\n\n/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Algorithm_set/bfgs.m:\n   13  \n   14  % Update global count number\n   15: global COUNTG;\n   16: COUNTG = COUNTG + 1;\n   17  \n   18  % Keep bfgs approximate Hessian matrix positive definite\n\n/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Algorithm_set/newton.m:\n   12  \n   13  % Update global count number\n   14: global COUNTG;\n   15  global COUNTH;\n   16  COUNTH = COUNTH + 1;\n   17: COUNTG = COUNTG + 1;\n   18  \n   19  % Compute gradient value and Hessian matrix at point x\n\n/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Algorithm_set/steepest.m:\n   12  \n   13  % Update global count number\n   14: global COUNTG;\n   15: COUNTG = COUNTG + 1;\n   16  \n   17  % Compute steepest descent direction\n\n/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Algorithm_set/trustregion.m:\n   17  % Update global count number\n   18  global COUNTF;\n   19: global COUNTG;\n   20  global COUNTH;\n   21: COUNTG = COUNTG + 1;\n   22  COUNTF = COUNTF + 1;\n   23  \n\n/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Algorithm_set/trustregion.m~:\n   17  % Update global count number\n   18  global COUNTF;\n   19: global COUNTG;\n   20  global COUNTH;\n   21: COUNTG = COUNTG + 1;\n   22  COUNTF = COUNTF + 1;\n   23  \n\n/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/searching_set/backtrack.m:\n   57  \n   58  % iteration global counter\n   59: global COUNTG;\n   60: COUNTG = COUNTG + 1;\n   61  \n   62  % Evaluation gradient for one-dimensional function\n\n/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/searching_set/Hessianupdate.m:\n    5  \n    6  % Increment global gradient counter\n    7: global COUNTG;\n    8: COUNTG = COUNTG + 2;\n    9  \n   10  % Calculation difference between current point gradient and previous point gradient\n\n/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/searching_set/sr1update.m:\n    4  \n    5  % Increment global greater counter\n    6: global COUNTG;\n    7: COUNTG = COUNTG + 2;\n    8  \n    9  % Compute difference between current gradient value and previous point gradient value\n\n/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/searching_set/wolfe.m:\n  130  function gphivalue = gphi(p,x,d,a)\n  131  % Increment global function counter\n  132: global COUNTG;\n  133: COUNTG = COUNTG + 1;\n  134  \n  135  res = x+a*d;\n\n/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/searching_set/wolfe.m~:\n  130  function gphivalue = gphi(p,x,d,a)\n  131  % Increment global function counter\n  132: global COUNTG;\n  133: COUNTG = COUNTG + 1;\n  134  \n  135  res = x+a*d;\n\n48 matches across 14 files\n",
 			"settings":
 			{
-				"buffer_size": 103716,
+				"buffer_size": 4630,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/searching_set/backtrack.m",
+			"settings":
+			{
+				"buffer_size": 1124,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Algorithm_set/bfgs.m",
+			"settings":
+			{
+				"buffer_size": 677,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Algorithm_set/newton.m",
+			"settings":
+			{
+				"buffer_size": 655,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Algorithm_set/steepest.m",
+			"settings":
+			{
+				"buffer_size": 437,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Algorithm_set/trustregion.m",
+			"settings":
+			{
+				"buffer_size": 1885,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/MrEleven.m",
+			"settings":
+			{
+				"buffer_size": 3777,
 				"line_ending": "Unix"
 			}
 		}
@@ -243,13 +305,25 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 337.0,
-		"last_filter": "sty",
+		"height": 307.0,
+		"last_filter": "inst",
 		"selected_items":
 		[
 			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
 				"sty",
 				"Set Syntax: LaTeX"
+			],
+			[
+				"INSTA",
+				"Package Control: Install Package"
 			],
 			[
 				"pytho",
@@ -258,14 +332,6 @@
 			[
 				"ins",
 				"Package Control: Install Package"
-			],
-			[
-				"inst",
-				"Package Control: Install Package"
-			],
-			[
-				"remov",
-				"Package Control: Remove Package"
 			],
 			[
 				"in",
@@ -376,7 +442,7 @@
 				"PackageResourceViewer: Open Resource"
 			]
 		],
-		"width": 521.0
+		"width": 502.0
 	},
 	"console":
 	{
@@ -398,28 +464,74 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/Heerye/Dropbox/2015spring/no417/final_project/project_latex"
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/project_latex",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/project_latex/latex",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/project_latex/references",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Algorithm_set",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/problem_set",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/searching_set"
 	],
 	"file_history":
 	[
-		"/Users/Heerye/Dropbox/2015spring/no417/3_hw/XiHe_HW03.tex",
-		"/Users/Heerye/.zshrc",
-		"/Users/Heerye/Desktop/code/Project Euler/level_1.py",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/searching_set/wolfe.m",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/searching_set/cg.m",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/searching_set/backtrack.m",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/default.m",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Algorithm_set/trustregion.m",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/MrEleven.m",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/runner.m",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Algorithm_set/bfgs.m",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Algorithm_set/newton.m",
+		"/Users/Heerye/Desktop/code/C++/mpi/Introduction to OpenMP/042208.c",
+		"/Users/Heerye/Library/Application Support/Sublime Text 3/Packages/LaTeXTools/figure.sublime-snippet",
+		"/Users/Heerye/Library/Application Support/Sublime Text 3/Packages/LaTeXTools/LaTeX math.sublime-completions",
+		"/Users/Heerye/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/project_latex/latex/project.tex",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/searching_set/Hessianupdate.m",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/searching_set/sr1update.m",
+		"/Users/Heerye/Dropbox/2015spring/martin/asyncocoa/everything.tex",
 		"/Users/Heerye/Dropbox/2015spring/martin/asyncocoa/asyncocoa.tex",
+		"/Users/Heerye/Library/Application Support/Sublime Text 3/Packages/User/BracketGuard.sublime-settings",
+		"/Users/Heerye/Library/Application Support/Sublime Text 3/Packages/BracketGuard/BracketGuard.sublime-settings",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Checkvars.m",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Algorithm_set/steepest.m",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Optsolver.m",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Optsolver.txt",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/project_latex/styles/everything.tex",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/project_latex/styles/commands.sty",
+		"/Users/Heerye/Library/Application Support/Sublime Text 3/Packages/LaTeXTools/table.sublime-snippet",
+		"/Users/Heerye/.zshrc",
+		"/Users/Heerye/Library/Application Support/Sublime Text 3/Packages/LaTeXTools/LaTeX.sublime-completions",
+		"/Users/Heerye/Library/Application Support/Sublime Text 3/Packages/User/LaTeXTools.sublime-settings",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/problem_set/box.m",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/problem_set/brown.m",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/project_latex/references/references.bib",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/project_latex/latex/project.toc",
+		"/Users/Heerye/Desktop/code/Latex/coral_Report/example.tex",
+		"/Users/Heerye/Desktop/code/Latex/coral_Report/example",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/problem_set/p16_f.m",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/problem_set/p16_g.m",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/problem_set/p10_h.m",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/problem_set/p10_g.m",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/problem_set/p05_h.m",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/problem_set/p05_g.m",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Optimizer.m",
+		"/Users/Heerye/Desktop/code/python notes",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/problem_set/rosenbrock.m",
+		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/default.m~",
+		"/Users/Heerye/Dropbox/2015spring/no417/3_hw/XiHe_HW03.tex",
+		"/Users/Heerye/Desktop/code/Project Euler/level_1.py",
 		"/Users/Heerye/Desktop/code/mpi/bones_mpi.c",
 		"/Users/Heerye/Desktop/code/mpi/buffon_fsu.sh",
 		"/Users/Heerye/Desktop/re.py",
 		"/Users/Heerye/Desktop/code1.py",
 		"/Users/Heerye/Desktop/1.txt",
-		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Optimizer.m",
 		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/main.m",
-		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Optsolver.m",
 		"/Users/Heerye/Downloads/House.of.Cards.2013.S03E08.720p.NF.WEBRip.DD5.1.x264-NTb/House.of.Cards.2013.S03E08.720p.NF.WEBRip.DD5.1.x264-NTb.简体&英文.srt",
 		"/Users/Heerye/Downloads/House.of.Cards.2013.S03E09.720p.NF.WEBRip.DD5.1.x264-NTb/House.of.Cards.2013.S03E09.720p.NF.WEBRip.DD5.1.x264-NTb.简体&英文.srt",
 		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/p.m",
-		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Algorithm_set/newton.m",
 		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/searching_set/backtracking.m",
-		"/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Algorithm_set/steepest.m",
 		"/Users/Heerye/Dropbox/2015spring/martin/asyncocoa/literature.bib",
 		"/Users/Heerye/Dropbox/2015spring/no417/PIPAL_1.2/Pipal.m",
 		"/Users/Heerye/Dropbox/2015spring/no417/final_project/cg/syntextest.m",
@@ -432,14 +544,11 @@
 		"/Users/Heerye/Dropbox/2015spring/no417/final_project/newton/newton.m",
 		"/Users/Heerye/Dropbox/2015spring/no417/final_project/newton/newton_hw.m",
 		"/Users/Heerye/Library/Application Support/Sublime Text 3/Packages/User/bh_core.sublime-settings",
-		"/Users/Heerye/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/Users/Heerye/Dropbox/2015spring/no417/final_project/subgradient/example.m",
 		"/Users/Heerye/Dropbox/2015spring/no417/final_project/steepestdescent/rosenbrock.m",
 		"/Users/Heerye/Dropbox/2015spring/no417/final_project/cg/cg.m",
-		"/Users/Heerye/Dropbox/2015spring/no417/final_project/project_latex/references/references.bib",
 		"/Users/Heerye/Dropbox/2015spring/no417/final_project/steepestdescent/linesearch.m",
 		"/Users/Heerye/Dropbox/2015spring/no417/final_project/project_latex/latex/project.fdb_latexmk",
-		"/Users/Heerye/Dropbox/2015spring/no417/final_project/project_latex/latex/project.tex",
 		"/Users/Heerye/Library/Application Support/Sublime Text 3/Packages/User/Matlab.sublime-build",
 		"/Users/Heerye/Dropbox/2015spring/no417/final.sublime-project",
 		"/Users/Heerye/Dropbox/2015spring/no417/final_project/final_project/cg/cg.m",
@@ -448,7 +557,6 @@
 		"/Users/Heerye/Dropbox/2015spring/no417/final_project/final.sublime-workspace",
 		"/Users/Heerye/Dropbox/2015spring/no417/final_project/steepestdescent/steepestdescent.m",
 		"/Users/Heerye/Dropbox/2015spring/no417/final_project/project_matlab/leastsquares.m",
-		"/Users/Heerye/Dropbox/2015spring/no417/final_project/project_latex/latex/project.toc",
 		"/Users/Heerye/Dropbox/2015spring/no417/final_project/newton/example3.m",
 		"/Users/Heerye/Dropbox/2015spring/no417/final_project/newton/example2.m",
 		"/Users/Heerye/Dropbox/2015spring/no417/final_project/newton/example.m",
@@ -493,53 +601,18 @@
 		"/Users/Heerye/Desktop/code/aloha/forus.py",
 		"/Users/Heerye/Desktop/code/we.txt",
 		"/Users/Heerye/Desktop/code/forus.py",
-		"/Users/Heerye/Desktop/code/result.py",
-		"/Users/Heerye/Desktop/code/forustest.py",
-		"/Users/Heerye/Desktop/code/python notes",
-		"/Users/Heerye/Desktop/code/func.py",
-		"/Users/Heerye/Desktop/code/test_out.txt",
-		"/Users/Heerye/Desktop/code/testwe.txt",
-		"/Users/Heerye/Desktop/code/we copy 2.txt",
-		"/Applications/MATLAB_R2014a.app/bin/lcdata_utf8.xml",
-		"/Applications/MATLAB_R2014a.app/bin/lcdata.xml",
-		"/Users/Heerye/Dropbox/2015spring/pr426/6_hw/hw6.tex",
-		"/Users/Heerye/Dropbox/2015spring/pr426/5_hw/classify_first.m",
-		"/Users/Heerye/Dropbox/2015spring/pr426/5_hw/classify_third.m",
-		"/Users/Heerye/Dropbox/2015spring/sm429/hw_2/XiHe_HW02.tex",
-		"/Users/Heerye/Dropbox/nkt/abstract.tex",
-		"/Users/Heerye/Dropbox/nkt/manual.tex",
-		"/Users/Heerye/Dropbox/nkt/mac/manual.tex",
-		"/Users/Heerye/Library/Application Support/Sublime Text 3/Packages/LaTeXTools/LaTeX math.sublime-completions",
-		"/Users/Heerye/Dropbox/nkt/main.tex",
-		"/Users/Heerye/Dropbox/nkt/acknowledgements.tex",
-		"/Users/Heerye/Dropbox/nkt/resume.tex",
-		"/Users/Heerye/Dropbox/nkt/mac/everything.tex",
-		"/Users/Heerye/Dropbox/2015spring/no417/2_hw/XiHe_HW02.tex",
-		"/Users/Heerye/Dropbox/2015spring/pr426/5_hw/hw5.tex",
-		"/Users/Heerye/Dropbox/2015spring/no417/newton/newton.m",
-		"/Users/Heerye/Dropbox/2015spring/no417/2_hw/conf.tex",
-		"/Users/Heerye/Library/Containers/com.apple.mail/Data/Library/Mail Downloads/68157F6E-9618-4A55-87FA-3E7783625B96/cpp/src/cocoa/class/HingeLossCD.h",
-		"/Users/Heerye/Library/Containers/com.apple.mail/Data/Library/Mail Downloads/68157F6E-9618-4A55-87FA-3E7783625B96/cpp/src/cocoa/class/QuadraticLoss.h",
-		"/Users/Heerye/Library/Containers/com.apple.mail/Data/Library/Mail Downloads/68157F6E-9618-4A55-87FA-3E7783625B96/cpp/src/cocoa/class/HingeLoss.h",
-		"/Users/Heerye/Library/Containers/com.apple.mail/Data/Library/Mail Downloads/68157F6E-9618-4A55-87FA-3E7783625B96/cpp/src/cocoa/cocoa.cpp",
-		"/Users/Heerye/Library/Application Support/Sublime Text 3/Packages/LaTeXTools/LaTeX.sublime-completions",
-		"/Users/Heerye/Dropbox/nkt/mac/nkthesis.bib",
-		"/Users/Heerye/Dropbox/nkt/nkthesis.bib",
-		"/Users/Heerye/Dropbox/nkt/references.tex",
-		"/Users/Heerye/Library/Application Support/Sublime Text 3/Packages/BracketHighlighter/bh_core.sublime-settings",
-		"/Users/Heerye/Dropbox/2015spring/martin/coral_seminar/seminar.tex",
-		"/Users/Heerye/Dropbox/2015spring/martin/PCDM_git/pcdm_with_linear_constratints/seminar.tex",
-		"/Users/Heerye/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings"
+		"/Users/Heerye/Desktop/code/result.py"
 	],
 	"find":
 	{
-		"height": 28.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 96.0,
 		"where_history":
 		[
+			""
 		]
 	},
 	"find_state":
@@ -547,6 +620,66 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"flag",
+			"COUNTG",
+			"$",
+			"Trust Region Method",
+			"Conjugate Direction Method",
+			"0.7",
+			"0.6",
+			"Trust Region Method",
+			"Backtracking Line Search",
+			"d",
+			"equation",
+			"Flexible",
+			"radius",
+			"1e-4",
+			"10e-4",
+			"Optsolver",
+			"1001",
+			"Perturbation for non-positive definite matrix",
+			"Wolfe (strong) Conditions",
+			"(strong) Wolfe",
+			"Backtracking Line Search",
+			"Perturbation for non-positive definite matrix",
+			"xi",
+			"1001",
+			"Countsr1H",
+			"CountbfgsH",
+			"bfgsH",
+			"1001",
+			"}\n",
+			"comments",
+			"newton",
+			"approximal",
+			"approximation",
+			"C",
+			"&",
+			"$",
+			"&",
+			"-5",
+			"F",
+			"H",
+			"bfgsH",
+			"1",
+			";",
+			"global",
+			"norm",
+			"Quadratic",
+			"Genhumps",
+			"\\cdot \\mathbf{1}",
+			"\\cdot\\mathbf{1}",
+			"Rosenbrock",
+			"1001",
+			"iter",
+			"theorem",
+			"multiline*",
+			"definition",
+			"steepest",
+			"function",
+			"gphi(p,x,d,0)",
+			"phi(p,x,d,amid)",
+			"phi(p,x,d,0)",
 			"\\quad ",
 			"BODYGUARD",
 			"\\quad &",
@@ -614,67 +747,7 @@
 			"addid",
 			"10000",
 			"dic",
-			"en_us.Iso8859-1",
-			"en_us",
-			"process",
-			"equation",
-			"\\sum_{k=1}^K",
-			"equation",
-			"fig:labl",
-			"fig:lab",
-			"equation",
-			"10^-4",
-			"\\te{A}",
-			",",
-			"equation",
-			"mean",
-			"mean_i",
-			"K",
-			"k",
-			"example",
-			"geqslant",
-			"leqslant",
-			"geometric",
-			"Markov Chain",
-			"probability",
-			"face",
-			"L_{max}",
-			"norm",
-			"x_j",
-			"^t",
-			"positive perron",
-			"perron",
-			"$H-$",
-			"$$NQZ$$",
-			"NQZ",
-			"yy2010",
-			"yy22011",
-			"\\te{T}",
-			"Theorem",
-			"Conclusion",
-			"Algorithm",
-			"Theorem",
-			"Definition",
-			"red",
-			"\\hat{x}^j",
-			"}^2",
-			"L_{max}",
-			"\\norm{\\Delta_i^j}_w^2",
-			"+\\frac{2\\gamma}{L_{max}}(",
-			"\\frac{2\\gamma}{L_{max}}",
-			"L_{max}",
-			"|\\Delta_i^j|",
-			"^*",
-			"\\frac{\\gamma}{L_{max}}",
-			"g_i^j",
-			"_{1-\\alpha}",
-			"_{1- \\alpha}",
-			"L_{res}",
-			"line",
-			"align*",
-			"part",
-			"equation",
-			"\\lambda"
+			"en_us.Iso8859-1"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -692,7 +765,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -701,15 +774,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6271,
+						"buffer_size": 31607,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1395,
-								1395
+								1158,
+								1158
 							]
 						],
 						"settings":
@@ -717,6 +790,31 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
@@ -727,56 +825,32 @@
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
 							],
-							"syntax": "Packages/LaTeXing/support/LaTeX.tmLanguage"
+							"colorcode": true,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1809.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -784,19 +858,218 @@
 				},
 				{
 					"buffer": 1,
-					"file": "/Users/Heerye/Dropbox/2015spring/martin/asyncocoa/asyncocoa.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 103716,
+						"buffer_size": 4630,
 						"regions":
 						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										183,
+										189
+									],
+									[
+										310,
+										316
+									],
+									[
+										498,
+										504
+									],
+									[
+										541,
+										547
+									],
+									[
+										550,
+										556
+									],
+									[
+										671,
+										677
+									],
+									[
+										686,
+										692
+									],
+									[
+										695,
+										701
+									],
+									[
+										909,
+										915
+									],
+									[
+										952,
+										958
+									],
+									[
+										961,
+										967
+									],
+									[
+										1082,
+										1088
+									],
+									[
+										1097,
+										1103
+									],
+									[
+										1106,
+										1112
+									],
+									[
+										1317,
+										1323
+									],
+									[
+										1562,
+										1568
+									],
+									[
+										1687,
+										1693
+									],
+									[
+										1817,
+										1823
+									],
+									[
+										2019,
+										2025
+									],
+									[
+										2034,
+										2040
+									],
+									[
+										2043,
+										2049
+									],
+									[
+										2282,
+										2288
+									],
+									[
+										2347,
+										2353
+									],
+									[
+										2356,
+										2362
+									],
+									[
+										2595,
+										2601
+									],
+									[
+										2610,
+										2616
+									],
+									[
+										2619,
+										2625
+									],
+									[
+										2857,
+										2863
+									],
+									[
+										2894,
+										2900
+									],
+									[
+										2903,
+										2909
+									],
+									[
+										3126,
+										3132
+									],
+									[
+										3163,
+										3169
+									],
+									[
+										3172,
+										3178
+									],
+									[
+										3376,
+										3382
+									],
+									[
+										3391,
+										3397
+									],
+									[
+										3400,
+										3406
+									],
+									[
+										3647,
+										3653
+									],
+									[
+										3662,
+										3668
+									],
+									[
+										3671,
+										3677
+									],
+									[
+										3946,
+										3952
+									],
+									[
+										3961,
+										3967
+									],
+									[
+										3970,
+										3976
+									],
+									[
+										4278,
+										4284
+									],
+									[
+										4293,
+										4299
+									],
+									[
+										4302,
+										4308
+									],
+									[
+										4538,
+										4544
+									],
+									[
+										4553,
+										4559
+									],
+									[
+										4562,
+										4568
+									]
+								],
+								"scope": ""
+							}
 						},
 						"selection":
 						[
 							[
-								9739,
-								9739
+								3403,
+								3403
 							]
 						],
 						"settings":
@@ -804,6 +1077,31 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
@@ -814,41 +1112,73 @@
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"colorcode": true,
+							"default_dir": "/Users/Heerye/Dropbox/2015spring/no417/final_project/project_latex",
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2086.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/searching_set/backtrack.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1124,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								77,
+								77
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
@@ -858,15 +1188,496 @@
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
-								"bh_tag_content"
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
 							],
-							"syntax": "Packages/LaTeXing/support/LaTeX.tmLanguage"
+							"colorcode": true,
+							"syntax": "Packages/Matlab/Matlab.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 5461.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Algorithm_set/bfgs.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 677,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								72,
+								72
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"colorcode": true,
+							"syntax": "Packages/Matlab/Matlab.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Algorithm_set/newton.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 655,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								66,
+								66
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"colorcode": true,
+							"syntax": "Packages/Matlab/Matlab.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Algorithm_set/steepest.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 437,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								71,
+								71
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"colorcode": true,
+							"syntax": "Packages/Matlab/Matlab.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/Algorithm_set/trustregion.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1885,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1698,
+								1698
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"colorcode": true,
+							"syntax": "Packages/Matlab/Matlab.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 762.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/Users/Heerye/Dropbox/2015spring/no417/final_project/Final_project_code/MrEleven.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3777,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2873,
+								2873
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"colorcode": true,
+							"syntax": "Packages/Matlab/Matlab.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1562.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -874,7 +1685,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 28.0
+		"height": 38.0
 	},
 	"input":
 	{
@@ -905,7 +1716,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 175.0
+		"height": 142.0
 	},
 	"output.find_results":
 	{
@@ -925,12 +1736,136 @@
 		"selected_items":
 		[
 			[
-				"",
-				"latex/project.tex"
+				"tru",
+				"Final_project_code/Algorithm_set/trustregion.m"
 			],
 			[
 				"tex",
-				"latex/project.tex"
+				"project_latex/latex/project.tex"
+			],
+			[
+				"new",
+				"Final_project_code/Algorithm_set/newton.m"
+			],
+			[
+				"bs",
+				"Final_project_code/Algorithm_set/bfgs.m"
+			],
+			[
+				"pro",
+				"project_latex/latex/project.tex"
+			],
+			[
+				"pr",
+				"project_latex/latex/project.tex"
+			],
+			[
+				"bf",
+				"Final_project_code/Algorithm_set/bfgs.m"
+			],
+			[
+				"sr",
+				"Final_project_code/searching_set/sr1update.m"
+			],
+			[
+				"cg",
+				"Final_project_code/searching_set/cg.m"
+			],
+			[
+				"bac",
+				"Final_project_code/searching_set/backtrack.m"
+			],
+			[
+				"trust",
+				"Final_project_code/Algorithm_set/trustregion.m"
+			],
+			[
+				"steep",
+				"Final_project_code/Algorithm_set/steepest.m"
+			],
+			[
+				"ne",
+				"Final_project_code/Algorithm_set/newton.m"
+			],
+			[
+				"cg.m",
+				"Final_project_code/searching_set/cg.m"
+			],
+			[
+				"ru",
+				"Final_project_code/runner.m"
+			],
+			[
+				"def",
+				"Final_project_code/default.m"
+			],
+			[
+				"p",
+				"project_latex/latex/project.tex"
+			],
+			[
+				"ever",
+				"project_latex/styles/everything.tex"
+			],
+			[
+				"",
+				"project_latex/latex/project.tex"
+			],
+			[
+				"d",
+				"Final_project_code/default.m"
+			],
+			[
+				"com",
+				"project_latex/styles/commands.sty"
+			],
+			[
+				"e",
+				"project_latex/styles/everything.tex"
+			],
+			[
+				"or",
+				"project_latex/latex/project.tex"
+			],
+			[
+				"prte",
+				"project_latex/latex/project.tex"
+			],
+			[
+				"che",
+				"Final_project_code/Checkvars.m"
+			],
+			[
+				"opt",
+				"Final_project_code/Optsolver.m"
+			],
+			[
+				"ref",
+				"project_latex/references/references.bib"
+			],
+			[
+				"ortex",
+				"project_latex/latex/project.tex"
+			],
+			[
+				"op",
+				"Final_project_code/Optimizer.m"
+			],
+			[
+				"rose",
+				"Final_project_code/problem_set/rosenbrock.m"
+			],
+			[
+				"protex",
+				"project_latex/latex/project.tex"
+			],
+			[
+				"ope",
+				"Final_project_code/Optimizer.m"
+			],
+			[
+				"wolf",
+				"Final_project_code/searching_set/wolfe.m"
 			],
 			[
 				"main",
@@ -943,10 +1878,6 @@
 			[
 				"te",
 				"test.m"
-			],
-			[
-				"cg",
-				"cg/cg.m"
 			],
 			[
 				"test",
@@ -969,16 +1900,8 @@
 				"subgradient/example.m"
 			],
 			[
-				"cg.m",
-				"cg/cg.m"
-			],
-			[
 				"exa",
 				"subgradient/example.m"
-			],
-			[
-				"new",
-				"newton/newton.m"
 			],
 			[
 				"example.m",
@@ -1016,8 +1939,8 @@
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": false,
-	"side_bar_width": 50.0,
+	"side_bar_visible": true,
+	"side_bar_width": 224.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

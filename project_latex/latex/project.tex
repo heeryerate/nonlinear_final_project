@@ -1,7 +1,7 @@
-%**********
-% Preamble
-%**********
 \documentclass[11pt]{report}
+
+\usepackage{algorithmic}
+\usepackage{algorithm}
 
 % Set packages to be used (most should be included in your LaTeX installation; the rest are locally defined)
 \usepackage{amsmath,amsfonts,amsthm,../styles/commands,graphicx,../styles/project}
@@ -18,53 +18,24 @@
 % Other packages you may want to consider:
 % amssymb, hyperref, longtable, natbib, rotating
 
-%**********
-% Document
-%**********
 \begin{document}
-
-%************
-% Title page
-%************
 
 \title {A survey on some nonlinear programming algorithms}
 \author{Xi He}
 
-%*************
-% Figure List
-%*************
-%\figurespagefalse % Uncomment if you do not have figures
-
-%************
-% Table List
-%************
-%\tablespagefalse % Uncomment if you do not have tables
-
-%*********
-% Preface
-%*********
 \preface
-%*********
-% Chapter
-%*********
 \chapter{Introduction}
 
 This project concerns the practical implementation of several classical optimization algorithms in the context of unconstrained nonlinear problems. By choosing proper parameter set and delicate implementation, we intend to achieve economy of computation or the solution of such problems. With respect to several test problems, we compare the various performance of each algorithms with different parameters setup. It also might be a reasonable instruction on deciding which algorithm should be applied when faced a new problem.
 
-At the first part of this project, we study several algorithms on solving unconstrained nonlinear optimization problems, such as steepest descent method, newton method and BFGS method with two kinds of linear search strategy: backtrack line search method and wolfe line search method. Trust region method is also argued with two similar approaches to solve trust region subproblem: conjugate gradient method and conjugate gradient method with SR1 Hessian matrix update method. Throughout the introduction of each algorithm, we also list convergence and complexity issues, however, one should note that we state some correct conclusions without rigorous proof.
+At the first part of this project, we study several algorithms on solving unconstrained nonlinear optimization problems, such as steepest descent method, newton method and BFGS method with two kinds of linear search strategy: backtrack line search method and wolfe line search method. Trust region method is also argued with two similar approaches to solve trust region subproblem: conjugate gradient method and conjugate gradient method with SR1 Hessian matrix update method\footnote{Most of figures and algorithms pseudocode come from \cite{NoceWrig06}.}. Throughout the introduction of each algorithm, we also list convergence and complexity issues, however, one should note that we state some correct conclusions without rigorous proof.
 
 In the latter part of this project, some detailed implementation concerns are discussed with respect to different problems and algorithms, including practical parameter set choosing, tricks on attaining economy computation and also some difficulties with respect to implementation. Results on numerical experiment are shown to clearly compare the performance of each algorithm with different parameters on each problem. Also, some analysis of the numerical result are presented.
 
 The structure of this project report is as follows. Chapter 2 includes relevant background on unconstrained optimization problems which forms the basis of the discussions in later chapters. In Chapter 3, after showing the very basic two descent directions we used in implementation, we discuss two kinds of linear search strategy. And then we present two kinds of quasi-newton method and show the global convergence results when applying the two line search method mentioned before. We introduce in Chapter 4 about trust region algorithms and conjugate gradient method with is proposed by solving the trust region subproblems. SR1 update which is stated in Chapter 3 will be reconsidered as a approach to solving trust region subproblem when combining with conjugate gradient method. Finally, in Chapter 5, we present, analyze and provide numerical results with respect to the algorithms we discuss in above chapters on some test problems. Brief summary of this project and some general conclusion will be stated in the Chapter 6. 
 
 In this report, we use the following notation. Let $f(x)$ be original nonlinear, smooth and differentiable objective function we want to minimize and $x$ be decision variables. We also denote gradient function of $f(x)$ by $g(x)=\nabla f(x)$ and denote $H(x)=\nabla^2 f(x)$ and $B(x)$ by the Hessian and approximation Hessian matrix of $f(x)$ at point $x$. With respect to algorithms, we use $d(x)$ to be an acceptable descent directions at point $x$ and $\alpha(x)$ to be an acceptable step-size along $d(x)$. At the last, $H\succ(\succeq) 0$ represents that the matrix is (semi) positive definite. 
-% The introduction should include a description of the project and a summary of the contents of the report.  In particular, it should provide a high-level description of the algorithms you have implemented, the challenges that you faced, and the highlights of your numerical experiments.  The introduction should include \emph{minimal} mathematical detail, if any at all.
 
-% The remaining chapters in this template suggest a way to format your report.  However, if you use this template, then you are not required to structure the report in the way that is outlined here.  Please feel free to change the names of chapters and/or organize your report differently.
-
-%*********
-% Chapter
-%*********
 \chapter{Fundamentals of Unconstrained Optimization}
 We frame this report in the context of the unconstrained optimization problem
 \begin{equation}
@@ -85,7 +56,7 @@ Note that it can be very difficult to find the global minimizer, since our knowl
 
 As it is shown in Figure \ref{fig:global_min}, in general case, a function $f$ may have a lot of local minimizers but just one global minimizer. Most algorithms is sensitive on the initial point we chose, which means, by choosing different initial point to run those algorithms, we may get different local minimizer.
 
-\begin{figure}[htpb]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth]{../images/global_min}
     \caption{Global minimum and Local minimum}
@@ -117,65 +88,356 @@ If $x^*$ is a local minimizer of $f$ and $H$ is continuous in an open neighborho
 
 Now, we state sufficient conditions, which are conditions on the derivatives of $f$ at the point $x^*$ that guarantee that $x^*$ is a local minimizer.
 \begin{theorem}(Second-Order Sufficient Conditions)
-Suppose that $H$ is continuous in an open neighborhood of $x^*$ and that $g(x^*) = 0$ and $H(x^*)$ is positive definite. Then $x^*$ is a strict local minimizer of $f$.
+Suppose that $H$ is continuous in an open neighborhood of $x^*$ and that $g(x^*) = 0$ and $H(x^*)$ is positive definite. Then $x^*$ is a strict local minimizer of $f$.  
 \end{theorem}
 
 \chapter{Algorithm Descriptions I: Flexible Step Method}\label{chp: flexible}
-
-% This chapter may discuss the algorithms that you have implemented, with comments on their similarities and differences.  For the reader's convenience, it may be useful to organize your discussion into sections, as suggested here.
-
-% This chapter may include a citation, say to the textbook.  A citation is created in the following way: ``Please see \cite{NoceWrig06} for further details.''  The first time that you compile this template, you will most likely find that the citation appears only as a question mark and no entry is created in the Bibliography page later on.  This is because, when compiling a \LaTeX\ document with a bibliography section, you need to run \texttt{bibtex} to generate the necessary bibliography files.  (You should be able to do this easily using your \LaTeX\ IDE.)  Once this is done, then after you compile your code again, the citation should appear as a numbered reference to an entry in the Bibliography section of the report.  (Note that you may need to run \texttt{bibtex} and compile your code a few times each in order for everything to sync correctly.)
-
-%*********
-% Section
-%*********
+In flexible step method, general framework of algorithms is as following
+\begin{algorithm}[H]
+\caption{General Algorithm of Flexible Step Method}
+\label{alg:General Flexible}
+\begin{algorithmic}[1]
+\REQUIRE Initial point $x_0$ and $k:=0$.
+\REPEAT 
+    \STATE Derive descent direction $d_k$ satisfying $g(x_k)^Td_k<0$
+    \STATE Compute step-size $\alpha_k$ alone descent direction $d_k$ by line search method
+    \STATE Update $x_{k+1} = x_k + \alpha_k d_k$, set $k = k + 1$
+\UNTIL Termination condition satisfied.
+\end{algorithmic}
+\end{algorithm}
 
 \section{Steepest Descent and Newton method}
 
-\section{Line Search Methods}
+Steepest descent direction and newton descent direction are two natural ways to get descent direction. In terms of steepest descent direction, due to $\norm{g(x)} >0$ when $x$ is not a stationary point, we can simply choose 
+\begin{equation}
+    d = -g(x),
+\end{equation}
 
-\section{Quasi-newton method}
+where we have $g(x)^Td = -\norm{g(x)}^2 <0$.
 
-% This section may summarize the line search methods that you have implemented.  Most likely, this will involve writing one or more equations.  You can write equations in-line, such as $Ax=b$, or you can write them as displayed equations, such as
-% \bequationn
-%   Ax = b
-% \eequationn
-% or, perhaps better yet, as
-% \bequation\label{linearsystem}
-%   Ax = b.
-% \eequation
-% Note that if you write the equation in the latter manner, then by using the \texttt{$\backslash$label} command, you can easily refer to this equation anywhere else in your document.  You refer to an equation like this: ``Equation~\eqref{linearsystem} has zero, one, or infinitely many solutions.''  If you create more equations before and/or after the one above, then \LaTeX\ will automatically renumber all of the equations so that they are in chronological order, and will update the references accordingly.  This is much easier than having to update equation number references manually, and reduces errors.
+For newton descent method, first we note that if $H(x)$ is a positive definite matrix, we have $H(x)^{-1}$ is positive definite and furthermore $d^TH(x)^{-1}d >0$, whenever $d\neq 0$. By considering that since $g(x)\neq 0$ when $x$ is not a stationary point, we have 
+\begin{equation}
+    g(x)^TH(x)^{-1}g(x) >0,
+\end{equation}
 
-%*********
-% Section
-%*********
+therefore, we can select 
+\begin{equation}\label{eq: newton direction}
+    d = -H(x)^{-1}g(x) 
+\end{equation}
+
+to be one possible descent direction. 
+
+Besides, when $H(x)$ is not positive definite, we can perturb it to be positive definite by add positive number to its diagonal. Actually, we use the following procedure to implement this perturbation.
+\begin{algorithm}[H]
+\caption{Perturbation for non-positive definite matrix}
+\label{alg:Perturbation for non-positive definite matrix}
+\begin{algorithmic}[1]
+\REQUIRE A non-positive definite matrix $P$ and a same-size identity matrix $I$
+%\STATE Set $\eta = 10^{-4}$
+\IF {$\min\mbox{eig}(P)<0.1$}
+    \STATE $P = P + (1-\min\mbox{eig}(P)) I$
+%    \STATE $\eta = 10\eta$
+\ENDIF
+\STATE Output a positive definite matrix $P$
+\end{algorithmic}
+\end{algorithm}
+
+Note that by using this approach, we guarantee the perturbed matrix $P$ to be positive definite and its minimal eigenvalue is at least greater than $0.9$, which suppose to be well-defined matrix when solving the linear system \eqref{eq: newton direction}.
+
+After we pick up a descent direction, we need find a proper step-size, which is what we called line search method in the next section.
+
+\section{Line Search Methods}\label{sec:Line_search}
+
+Always, step-size are chosen to give a sufficient reduction of $f$, but at the same time, we prefer to spend less time to choose a proper step-size. At current point $x_k$ with a descent direction $d_k$, we let
+\begin{equation}
+    \phi(\alpha) = f(x_k + \alpha d_k), \alpha>0, 
+\end{equation}
+
+we may say the ideal choice is to find a global minimizer $\alpha^*$ of the one-dimensional function $\phi(\alpha)$. However, it is too costly to find the global minimizer. Therefore, we apply some more practical strategies that calculating step in an inexact approach. In this project, we discuss two kinds of line search method as following.
+
+\subsection{Wolfe Conditions} % (fold)
+\label{ssub:wolfe_conditions}
+
+It contain two parts when find a proper step-size by wolfe conditions. Firstly, we should choose a step-size that provide sufficient reduction. We use the following condition to guarantee it
+\begin{equation}\label{eq: Wolfe_suff_decrease}
+    f(x_k+\alpha d_k) \leq f(x_k) + c_1 \alpha \nabla f_k^Td_k,
+\end{equation}
+
+which $c_1\in (0,1)$ is a parameter. By noting that $ \nabla f_k^Td_k<0$ since $d_k$ is a descent direction, we say that \eqref{eq: Wolfe_suff_decrease} is sufficient decrease condition. We show geometry explanation in Figure~\ref{fig: Wolfe_suff_decrease}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/wolfe1} 
+    \caption{Sufficient decrease condition}
+    \label{fig: Wolfe_suff_decrease}
+\end{figure}
+
+Except this condition, we make other condition called curvature condition to get rid of unacceptably short steps
+\begin{equation}\label{eq:wolfe_curvature}
+    \nabla f(x_k+\alpha_k p_k)^T \geq c_2 \nabla f_k^Tp_k,
+ \end{equation}
+
+ where $c_2\in (c_1,1)$ is another parameter. Geometry illustration is shown in Figure~\ref{fig:Wolfe_curvature}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/wolfe2}
+    \caption{Wolfe curvature condition}
+    \label{fig:Wolfe_curvature}
+\end{figure}
+
+Practically, we implement wolfe condition as following
+\begin{algorithm}[H]
+\caption{Wolfe Conditions}
+\label{alg:Wolfe Conditions}
+\begin{algorithmic}[1]
+\REQUIRE Initial step-size $\alpha_0 >0$, $\alpha_1 >0$ and $\alpha_{\max}$. Set $i:= 1$. 
+\STATE $\alpha = \bar{\alpha}$
+\REPEAT
+    \IF  {$\phi(\alpha_i) > \phi(0) + c_1 \alpha_i \phi'(0)$ or [$\phi(\alpha_i)\geq \phi(\alpha_{i-1}) \mbox{ and } i>1$]  }
+    \STATE $\alpha_*  \leftarrow \mathbf{zoom}(\alpha_{i-1},\alpha_i)$ and stop;
+    \ENDIF
+    \IF {$|\phi'(\alpha_i)| \leq -c_2\phi'(0)$}
+    \STATE set $\alpha_* \leftarrow a_i$ and stop;
+    \ENDIF
+    \IF {$\phi'(\alpha_i) \geq 0$}
+    \STATE set $\alpha_* \leftarrow \mathbf{zoom}(\alpha_i,\alpha_{i-1})$ and stop;
+    \ENDIF
+    \STATE Choose $\alpha_{i+1} \in (\alpha_i,\alpha_{\max})$
+    \STATE $i \leftarrow i+1$
+\UNTIL{}
+\STATE Terminate with $\alpha_k = \alpha$
+\end{algorithmic}
+\end{algorithm}
+
+Here zoom function is proposed to find a proper step-size in an interval.
+\begin{algorithm}[H]
+\caption{Wolfe Conditions (zoom function)}
+\label{alg:Wolfe Conditions zoom function}
+\begin{algorithmic}[1]
+\REQUIRE Initial step-size $\alpha_{low} >0$ and $\alpha_{high} >0$ 
+\REPEAT
+\STATE Choose $\alpha_j$ between $\alpha_{low}$ and $\alpha_{high}$.
+    \IF  {$\phi(\alpha_j) > \phi(0) + c_1 \alpha_j \phi'(0)$ or $\phi(\alpha_j)\geq \phi(\alpha_{low})$}
+    \STATE $\alpha_{high}\leftarrow \alpha_j$
+    \ELSE
+    \IF {$|\phi'(\alpha_j)| \leq -c_2\phi'(0)$}
+    \STATE set $\alpha_* \leftarrow a_j$ and stop
+    \ENDIF
+    \IF {$\phi'(\alpha_i)(\alpha_{high}-\alpha_{low}) \geq 0$}
+    \STATE set $\alpha_{high} \leftarrow \alpha_{low}$
+    \ENDIF
+    \STATE $\alpha_{low} \leftarrow \alpha_j$
+    \ENDIF
+\UNTIL{}
+\end{algorithmic}
+\end{algorithm}
+
+% subsubsection wolfe_coniditions (end)
+
+\subsection{Backtracking Line Search}
+Another popular approach is to drop curvature condition \eqref{eq:wolfe_curvature} by appropriately choosing candidate step lengths, which we called backtracking strategy.
+\begin{algorithm}[H]
+\caption{Backtracking Line Search}
+\label{alg:Backtracking Line Search}
+\begin{algorithmic}[1]
+\REQUIRE Initial step-size $\bar{\alpha} >0$ and shrinking parameter $\rho \in (0,1)$
+\STATE $\alpha = \bar{\alpha}$
+\REPEAT
+    \STATE $\alpha = \rho \alpha$
+\UNTIL{$f(x_k+ \alpha p_k) \leq f(x_k) + c \alpha \nabla f_k^Tp_k$}
+\STATE Terminate with $\alpha_k = \alpha$
+\end{algorithmic}
+\end{algorithm}
+
+Global convergence result for line search methods with respect to steepest descent method is given in the appendix. 
+
+\section{Quasi-newton method}\label{sec: Quasi-newton method}
+Another approach to derive descent direction is to use Quasi-newton method, which only depends on only first derivatives. Actually, what we do in Quasi-newton method is to approximate Hessian matrix by first derivatives instead of computing accurate Hessian matrix directly, which is sometimes computational expensive.
+
+In this project, we use BFGS method to update Hessian matrix with flexible step, which is one type of Quasi-newton method. 
+
+Let $B_k$ be BFGS approximate Hessian matrix at point current point $x_k$. And then we can derive descent direction from
+\begin{equation}\label{eq:BFGSupdate}
+    B_kd_k = -\nabla f(x_k). 
+\end{equation}
+
+Furthermore, we have $x_{k+1} = x_k + a_kd_k$, where $a_k$ is a proper step-size derived from line search method in section \ref{sec:Line_search}. By defining
+\begin{equation}
+    s_k = x_{k+1} - x_k \mbox{~and~} y_k = \nabla f_{k+1} - \nabla f_k,
+\end{equation}
+
+we have 
+\begin{equation}
+    B_{k+1} = B_k -\frac{B_ks_ks_k^TB_k}{s_k^TB_ks_k}+\frac{y_ky_k^T}{y_k^Ts_k},
+\end{equation}
+
+where $-\frac{B_ks_ks_k^TB_k}{s_k^TB_ks_k}+\frac{y_ky_k^T}{y_k^Ts_k}$ is a rank two matrix which only depends on first derivatives. Notice that to derive descent direction by \eqref{eq:BFGSupdate}, we need guarantee $B_k$ to be positive definite, luckily, as long as $B_k\succ 0$  and the curvature condition
+\begin{equation}
+    s_k^Ty_k >0
+\end{equation}
+
+is satisfied, then we have $B_{k+1}$ is positive definite.
+
+Practically, we use damped BFGS updating to overcome some shortage of BFGS updating, such as to avoid $y_k^Ts_k\approx 0$ or poorly conditioned Hessian approximation. We state damped BFGS updating as following
+\begin{algorithm}[H]
+\caption{Damped BFGS updating}
+\label{alg:Damped BFGS updating}
+\begin{algorithmic}[1]
+\REQUIRE $H_k$, $s_k=x_{k+1}-x_k$ and $r_k = \nabla f(x_{k+1})-\nabla f(x_k)$ at current point $x_k$. A parameter $\theta$.
+\STATE Compute
+\begin{equation}
+    \theta_k = \begin{cases}
+        1, & \mbox{if~~} r_k^Ts_k \geq \theta s_k^TH_ks_k\\
+        \frac{(1-\theta)s_k^TH_ks_k}{s_k^TH_ks_k-r_k^Ts_k}, &\mbox{otherwise}
+    \end{cases}
+\end{equation}
+\STATE Set $y_k = \theta_k r_k + (1-\theta_k)H_ks_k$
+\end{algorithmic}
+\end{algorithm}
+
+By this procedure, we guarantee that 
+\begin{equation}
+    y_k^Ts_k \geq \theta s_k^TH_ks_k >0,
+\end{equation}
+
+which leads to a well-defined BFGS updating.
+
+It is proved that BFGS method with Wolfe line search is global convergent and shares a superlinear convergence rate. 
+
 \chapter{Algorithm Descriptions II: Restricted Step Methods.}\label{chp: restricted}
 
+In restricted step method, general framework of algorithms is as following
+\begin{algorithm}[H]
+\caption{General Algorithm of Restricted Step Method}
+\label{alg:General Restricted}
+\begin{algorithmic}[1]
+\REQUIRE Initial point $x_0$ and $k:=0$.
+\REPEAT 
+    \STATE Generate a proper subproblem $G(d)$ at $x_k$
+    \STATE Solve subproblem to derive descent direction $d_k$
+    \STATE Update $x_{k+1} = x_k + d_k$, set $k = k + 1$
+\UNTIL Termination condition satisfied.
+\end{algorithmic}
+\end{algorithm}
+
 \section{Trust Region Method}
+Instead of calculate step size at each iteration, trust region method is one other approach to solve nonlinear optimization problems. In a sense, trust region is a restricted step method as the direction and step size are uniquely decided at each iteration. The main idea of trust region method is to generate a subproblem on a neighborhood of current point $x_k$. Normally, we set the subproblem as
+\begin{align}\label{eq: trust region subproblem}
+\min_{d_k}\quad & m_k(d_k) := f(x_k) + \nabla f(x_k)^Td_k + \frac{1}{2}d_k^TH_kd_k\\
+s.t. \quad & \norm{d_k} \leq \Delta_k.
+\end{align}
+
+Note that $m_k(d_k)$ is a approximate function of $f$ at point $x_k$ and with respect to $H_k$, we often set $H_k\succ 0$, but not necessarily, for example, we can choose $H_k$ to be the SR1 approximate Hessian matrix. 
+
+Therefore, based on the framework \ref{alg:General Restricted}, we have the following algorithm
+\begin{algorithm}[H]
+\caption{Trust Region Method}
+\label{alg:Trust Region Method}
+\begin{algorithmic}[1]
+\REQUIRE Current point $x_k$, trust region radius $\Delta_k$, subproblem $m_k(d_k)$ and two threshold $0<c_1 <c_2 <1$.
+\REPEAT
+\STATE Solve subproblem $m_k(d_k)$
+\STATE Compute the ratio
+\begin{equation}
+    \rho_k(d_k) := \frac{f(x_k)-f(x_k+d_k)}{m_k(0)-m_k(d_k)}.
+\end{equation}
+\IF{$\rho_k(d_k) \geq c_2$}
+\STATE Update $x_{k+1} = x_k + d_k$ and expand trust region $\Delta_{k+1} > \Delta_k$
+\ELSE
+\IF{$\rho_k(d_k) \in (c_1, c_2)$}
+\STATE Update $x_{k+1} = x_k + d_k$ and keep trust region $\Delta_{k+1} = \Delta_k$
+\ENDIF
+\ELSE
+\IF{$\rho_k(d_k) \leq c_1$}
+\STATE Keep $x_{k+1} = x_k$ and shrink trust region $\Delta_{k+1} < \Delta_k$
+\ENDIF
+\ENDIF
+\UNTIL{Meet termination condition}
+\end{algorithmic}
+\end{algorithm}
 
 \section{Conjugate Gradient Method}
+By deriving a set of $n$ vectors which is all conjugated for each other, we build a cheaper way to compute descent direction for quadratic problem
+\begin{equation}
+    \min_x \quad \phi(x) := \frac{1}{2}x^TAx - b^Tx.
+\end{equation}
 
-\section{Trust Region Subproblem}
+Actually, if we have a set of conjugated direction $\{p_0,\dots,p_{n-1}\}$, we can solve the problem in at most $n$ steps by repeating the following procedure
+\begin{itemize}
+    \item Compute the current residual
+    \begin{equation}
+        r_k = Ax_k - b
+    \end{equation}
+    \item Compute a steplength to minimize $\phi(x)$ along $x_k+\alpha p_k$
+    \begin{equation}
+        \alpha_k = -\frac{r_k^Tp_k}{p_k^TAp_k}
+    \end{equation}
+    \item Update $x_{k+1} = x_k +\alpha_k p_k$
+\end{itemize}
 
-% This section may summarize the trust region methods that you have implemented.  This may or may not involve providing one or more figures to illustrate the methods.  An example format for a figure can be seen in the \LaTeX\ code for producing Figure~\ref{logo} below.
+Actually, by letting the first conjugated direction $p_0= -r_0$, we can derive others conjugated direction step by step by the following algorithm
+\begin{algorithm}[H]
+\caption{Conjugate Direction Method}
+\label{alg:Conjugate Direction Method}
+\begin{algorithmic}[1]
+\REQUIRE Initial point $x_0$, set $r_0 = Ax_0-b$ and $p_0=-r_0$
+\REPEAT
+\STATE $\alpha_k = \frac{r_k^Tr_k}{p_k^TAp_k}$
+\STATE $ x_{k+1} = x_k + \alpha_kp_k$
+\STATE $ r_{k+1} = r_k + \alpha_kAp_k$
+\STATE $ \beta_{k+1} = \frac{r_{k+1}^Tr_{k+1}}{r_k^Tr_k}$
+\STATE $ p_{k+1} = -r_{k+1} + \beta_{k+1}p_k$
+\UNTIL{Meet termination condition}
+\end{algorithmic}
+\end{algorithm}
 
-% \bfigure[ht]
-%   \centering
-%   \includegraphics[height=1in]{../images/lehigh}
-%   \caption{Lehigh University logo}
-%   \label{logo}
-% \efigure
+\section{Trust Region Subproblem with CG Method}
+Here we state a nice approach to solve the trust region subproblem \eqref{eq: trust region subproblem}. 
+\begin{algorithm}[H]
+\caption{Trust Region Subproblem with CG Method}
+\label{alg:Trust Region Subproblem with CG Method}
+\begin{algorithmic}[1]
+\REQUIRE Initial point $x_0$, trust region radius $\Delta_k$ and we set $r_0 = Ax_0-b$ and $p_0=-r_0$
+\REPEAT
+\IF{$p_k^TAp_k<0$}
+\STATE Set $\alpha_k$ to be a positive value such that $\norm{x_k+\alpha_kp_k}_2 = \Delta_k$
+\STATE Update $x_{k+1} = x_k + \alpha_k p_k$ and stop
+\ELSE
+\STATE $\alpha_k = \frac{r_k^Tr_k}{p_k^TAp_k}$
+\ENDIF
+\IF{$\norm{x_k+\alpha_kp_k}_2 > \Delta_k$}
+\STATE Set $\alpha_k$ to be a positive value such that $\norm{x_k+\alpha_kp_k}_2 = \Delta_k$
+\STATE Update $x_{k+1} = x_k + \alpha_k p_k$ and stop
+\ELSE
+\STATE $x_{k+1} = x_k + \alpha_k p_k$ and $r_{k+1} = r_k + \alpha_kAp_k$
+\ENDIF
+\IF{$\norm{r_{k+1}}_2 \approx 0$}
+\STATE Update $x_{k+1} = x_k + \alpha_k p_k$ and stop
+\ELSE
+\STATE $\beta_{k+1} =\frac{r_{k+1}^Tr_{k+1}}{r_k^Tr_k}$ and $ p_{k+1} = -r_{k+1} + \beta_{k+1}p_k$
+\ENDIF
+\UNTIL{Meet termination condition}
+\end{algorithmic}
+\end{algorithm}
 
-% Note that it is important to provide a useful caption for the figure.  Moreover, we again provide a label so that if we want to refer to the figure anywhere else in the report, we can do so easily.
+Note that in this algorithm, $A$ can be chosen directly as Hessian matrix at current point $x_k$ or SR1 approximate Hessian matrix. With respect to SR1 update, which means to update $A(H_k)$ by the following formula
+\begin{equation}
+    H_{k+1} = H_k + \frac{(y_k-H_ks_k)(y_k-H_ks_k)^T}{(y_k-H_ks_k)^Ts_k},
+\end{equation}
 
-%*********
-% Chapter
-%*********
+where $y_k$ and $s_k$ are defined same as BFGS method in Section \ref{sec: Quasi-newton method}, and $ \frac{(y_k-H_ks_k)(y_k-H_ks_k)^T}{(y_k-H_ks_k)^Ts_k}$ is a rank-one matrix.
+
+Note that to make this update well-defined, we need the extra judgment that
+\begin{equation}
+    |(y_k-H_ks_k)^Ts_k| \geq c \norm{y_k-H_ks_k}\norm{s_k},
+\end{equation}
+
+where $c\in(0,1)$ is a user-specified constant. Also there is no guarantee that this update $H_{k+1}\succ 0$ even if $H_k\succ 0$.  However, it is not necessary to restrict $H_k$ to be positive definite, since the trust region subproblem are a constraint optimization problems.
 \chapter{Numerical Results}
 
 This chapter contains numerical results with respect to those algorithms we discussed in Chapter \ref{chp: flexible} and \ref{chp: restricted}. 
 
-Note that all algorithms are implemented by Matlab under Intel Core $i5$ $2.6$ GHz processor and $8$ GB memory. Throughout this chapter, with respect to each algorithm, we use $Iter.$ to represent the total number of Iter.ations it takes to meet termination conditions. If the actual $Iter.$ is greater than defined $maxiter$, we mark $Iter.$ by a slash. $Cputime$ stands for total time of a algorithms spend to find the minimizer and when the corresponding $Iter.$ is marked as a slash, $Cputime$ means time cost up to $maxiter$ iteration. We denote $xNorm$ by the norm of difference between ending point of an algorithm and the accurate minimizer. $gNorm$ represents for the norm of gradient at the ending point.
+Note that all algorithms are implemented by Matlab under Intel Core $i5$ $2.6$ GHz processor and $8$ GB memory. Throughout this chapter, with respect to each algorithm, we use $Iter.$ to represent the total number of Iterations it takes to meet termination conditions. If the actual $Iter.$ is greater than defined $maxiter$, we mark $Iter.$ by a slash. $Cputime$ stands for total time of a algorithms spend to find the minimizer and when the corresponding $Iter.$ is marked as a slash, $Cputime$ means time cost up to $maxiter$ iteration. We denote $xNorm$ by the norm of difference between ending point of an algorithm and the accurate minimizer. $gNorm$ represents for the norm of gradient at the ending point.
 
 We begin by providing some general comments that may be useful for achieve a economy computation. 
 
@@ -192,9 +454,19 @@ We set the default parameter value as following
              \textbf{value}& $1000$&$10^{-6}$ & $(10^{-4},0.9)$ &${(0.3,0.9)}$\\
         \hline
         \hline
-        \textbf{i} & \textbf{cgopttol}& \textbf{cgmaxiter}& \textbf{sr1updatetol}& \textbf{bfgsupdatetol}& \textbf{radius} \\
+        \textbf{i} & \textbf{cgopttol}& \textbf{cgmaxiter}& \textbf{sr1updatetol}& \textbf{bfgsupdatetol}& \textbf{initialradius} \\
         \hline
          \textbf{value}& $10^{-6}$& $50$ & $10^{-6}$ & $0.2$ &$0.25$\\
+        \hline
+        \hline
+        \textbf{i} & \textbf{perturbHession}& \textbf{shrinkradius}& \textbf{expandradius}& \textbf{shrinkbacktrack}& \textbf{residuetol} \\
+        \hline
+         \textbf{value}& $10^{-4}$& $0.25$ & $2$ & $0.25$ &$10^{-6}$\\
+        \hline
+        \hline
+        \textbf{i} & \textbf{wolfemax}& \textbf{posdeftol}& \textbf{mineigtol} \\
+        \hline
+         \textbf{value}& $10$& $0.1$ & $1.0$\\
         \hline
         \hline
         \end{tabular}
@@ -216,21 +488,22 @@ Accurate minimizer:
 \end{equation}
 
 Numerical results with initial point $0\mathbf{e}$:
-\begin{table}[htpb]
+\begin{table}[H]
     \caption{Rosenbrock, with initial $0\mathbf{e}$}
     \label{tab:Rosenbrock_initial}
     \begin{center}
-        \begin{tabular}{l|cccc}
-\textbf{Rosenbrock}           &   \textbf{xNorm}     &\textbf{gNorm}     & \textbf{Iter.}&  \textbf{Cputime}   \\
+        \begin{tabular}{l|cccccc}
+\textbf{ROSENBROCK}&    gNorm       &   Iter.  &   Cputime   &   feval&geval&Hevel\\
 \hline
-steepestbacktrack   &   $1.253e+00 $&   $1.574e-01 $&   $- $&    $0.6407    $    \\
-steepestwolfe       &   $1.255e+00 $&   $1.010e-01 $&   $- $&    $0.5415    $    \\
-newtonbacktrack     &   $1.414e+00 $&   $9.801e-07 $&   $13   $&    $0.0660    $    \\
-newtonwolfe         &   $1.414e+00 $&   $3.652e-10 $&   $14   $&    $0.0810    $    \\
-trustregioncg       &   $1.414e+00 $&   $1.310e-07 $&   $42   $&    $0.0855    $    \\
-sr1trustregioncg    &   $1.414e+00 $&   $3.032e-07 $&   $77   $&    $0.0822    $    \\
-bfgsbacktrack       &   $1.414e+00 $&   $1.205e-08 $&   $26   $&    $0.0771    $    \\
-bfgswolfe           &   $1.414e+00 $&   $1.170e-07 $&   $21   $&    $0.0778    $    \\     \end{tabular}
+steepestbacktrack   &   $1.000e-01 $&   $- $&   $0.5183  $&$10469$&$7238 $&$0    $       \\
+steepestwolfe       &   $8.583e-05 $&   $-$&   $0.5777  $&$10528$&$5048 $&$0    $       \\
+newtonbacktrack     &   $7.406e-07 $&   $13   $&   $0.0475  $&$33   $&$44   $&$13   $       \\
+newtonwolfe         &   $3.116e-10 $&   $15   $&   $0.0588  $&$57   $&$66   $&$15   $       \\
+trustregioncg       &   $1.363e-06 $&   $45   $&   $0.0674  $&$91   $&$92   $&$45   $       \\
+sr1trustregioncg    &   $2.174e-08 $&   $69   $&   $0.0775  $&$139  $&$278  $&$0    $       \\
+bfgsbacktrack       &   $3.416e-08 $&   $23   $&   $0.0529  $&$63   $&$125  $&$0    $       \\
+bfgswolfe           &   $2.455e-07 $&   $21   $&   $0.0577  $&$83   $&$133  $&$0    $       \\
+     \end{tabular}
     \end{center}
 \end{table}
 
@@ -246,22 +519,22 @@ Accurate minimizer:
     x = 0\mathbf{e}  .
 \end{equation}
 
-Numerical results with initial point $2\mathbf{e}$:
-\begin{table}[htpb]
-    \caption{Genhumps, with initial $2\mathbf{e}$}
+Numerical results with initial point $\mathbf{e}$:
+\begin{table}[H]
+    \caption{Genhumps, with initial $\mathbf{e}$}
     \label{tab:Genhumps_initial}
     \begin{center}
-        \begin{tabular}{l|cccc}
-\textbf{Genhumps}           &   \textbf{xNorm}     &\textbf{gNorm}     & \textbf{Iter.}&  \textbf{Cputime}   \\
+        \begin{tabular}{l|cccccc}
+\textbf{GENHUMPS}&  gNorm       &   Iter.  &   Cputime   &   feval&geval&Hevel\\
 \hline
-steepestbacktrack   &   $4.552e-05 $&   $4.552e-06 $&   $156  $&    $0.1750    $    \\
-steepestwolfe       &   $4.648e-05 $&   $4.648e-06 $&   $155  $&    $0.1365    $    \\
-newtonbacktrack     &   $7.363e-08 $&   $1.291e-08 $&   $18   $&    $0.0817    $    \\
-newtonwolfe         &   $1.476e-09 $&   $1.682e-10 $&   $14   $&    $0.0665    $    \\
-trustregioncg       &   $1.037e-06 $&   $1.674e-07 $&   $50   $&    $0.0833    $    \\
-sr1trustregioncg    &   $1.046e-05 $&   $1.551e-06 $&   $461  $&    $0.2313    $    \\
-bfgsbacktrack       &   $9.840e-06 $&   $1.867e-06 $&   $19   $&    $0.0754    $    \\
-bfgswolfe           &   $9.840e-06 $&   $1.867e-06 $&   $19   $&    $0.0671    $    \\   
+steepestbacktrack   &   $3.589e-06 $&   $102  $&   $0.1373  $&$317  $&$364  $&$0    $       \\
+steepestwolfe       &   $4.275e-06 $&   $131  $&   $0.1380  $&$487  $&$562  $&$0    $       \\
+newtonbacktrack     &   $2.716e-06 $&   $18   $&   $0.0545  $&$39   $&$57   $&$18   $       \\
+newtonwolfe         &   $5.305e-08 $&   $12   $&   $0.0696  $&$46   $&$55   $&$12   $       \\
+trustregioncg       &   $4.060e-06 $&   $34   $&   $0.0685  $&$69   $&$70   $&$34   $       \\
+sr1trustregioncg    &   $2.194e-06 $&   $65   $&   $0.0919  $&$131  $&$262  $&$0    $       \\
+bfgsbacktrack       &   $3.330e-06 $&   $29   $&   $0.0642  $&$67   $&$151  $&$0    $       \\
+bfgswolfe           &   $3.543e-06 $&   $37   $&   $0.0746  $&$150  $&$243  $&$0    $       \\
  \end{tabular}
     \end{center}
 \end{table}
@@ -281,21 +554,21 @@ Accurate minimizer:
 \end{equation}
 
 Numerical results with initial point $0\mathbf{e}$:
-\begin{table}[htpb]
+\begin{table}[H]
     \caption{Quadratic, with initial $0\mathbf{e}$}
     \label{tab:Quadratic_initial}
     \begin{center}
-        \begin{tabular}{l|cccc}
-\textbf{Quadratic}           &   \textbf{xNorm}     &\textbf{gNorm}     & \textbf{Iter.}&  \textbf{Cputime}   \\
+        \begin{tabular}{l|cccccc}
+\textbf{QUADRATIC}& gNorm       &   Iter.  &   Cputime   &   feval&geval&Hevel\\
 \hline
-steepestbacktrack   &   $5.612e-04 $&   $1.537e-06 $&   $18   $&    $0.2044    $    \\
-steepestwolfe       &   $5.612e-04 $&   $1.537e-06 $&   $18   $&    $0.1459    $    \\
-newtonbacktrack     &   $5.611e-04 $&   $4.591e-16 $&   $1    $&    $0.0777    $    \\
-newtonwolfe         &   $5.611e-04 $&   $4.591e-16 $&   $1    $&    $0.0823    $    \\
-trustregioncg       &   $5.605e-04 $&   $2.445e-06 $&   $33   $&    $0.1816    $    \\
-sr1trustregioncg    &   $5.615e-04 $&   $2.596e-06 $&   $28   $&    $0.1749    $    \\
-bfgsbacktrack       &   $5.624e-04 $&   $2.952e-06 $&   $10   $&    $0.2255    $    \\
-bfgswolfe           &   $5.624e-04 $&   $2.952e-06 $&   $10   $&    $0.1300    $    \\
+steepestbacktrack   &   $1.537e-06 $&   $18   $&   $0.1445  $&$37   $&$56   $&$0    $       \\
+steepestwolfe       &   $1.537e-06 $&   $18   $&   $0.1375  $&$55   $&$74   $&$0    $       \\
+newtonbacktrack     &   $4.591e-16 $&   $1    $&   $0.0538  $&$3    $&$5    $&$1    $       \\
+newtonwolfe         &   $4.591e-16 $&   $1    $&   $0.0607  $&$4    $&$6    $&$1    $       \\
+trustregioncg       &   $6.004e-07 $&   $28   $&   $0.1554  $&$57   $&$58   $&$28   $       \\
+sr1trustregioncg    &   $2.463e-06 $&   $21   $&   $0.1376  $&$43   $&$86   $&$0    $       \\
+bfgsbacktrack       &   $2.952e-06 $&   $10   $&   $0.0992  $&$21   $&$52   $&$0    $       \\
+bfgswolfe           &   $2.952e-06 $&   $10   $&   $0.1170  $&$31   $&$62   $&$0    $       \\
  \end{tabular}
     \end{center}
 \end{table}
@@ -315,67 +588,31 @@ Accurate minimizer:
 \end{equation}
 
 Numerical results with initial point $(0,0,0,1)^T$:
-\begin{table}[htpb]
+\begin{table}[H]
     \caption{Leastsquares, with initial $(0,0,0,1)^T$}
     \label{tab:Leastsquares_initial}
     \begin{center}
-        \begin{tabular}{l|cccc}
-\textbf{Leastsquares}           &   \textbf{xNorm}     &\textbf{gNorm}     & \textbf{Iter.}&  \textbf{Cputime}   \\
+        \begin{tabular}{l|cccccc}
+\textbf{LEASTSQUARES}&  gNorm       &   Iter.  &   Cputime   &   feval&geval&Hevel\\
 \hline
-steepestbacktrack   &   $4.391e+03 $&   $1.189e-02 $&   $- $&    $1.6771    $    \\
-steepestwolfe       &   $4.391e+03 $&   $1.185e-02 $&   $- $&    $1.0915    $    \\
-newtonbacktrack     &   $4.392e+03 $&   $6.375e-07 $&   $17   $&    $0.0973    $    \\
-newtonwolfe         &   $4.392e+03 $&   $6.375e-07 $&   $17   $&    $0.0820    $    \\
-trustregioncg       &   $3.261e-01 $&   $9.553e-07 $&   $177  $&    $0.1801    $    \\
-sr1trustregioncg    &   $4.392e+03 $&   $4.419e-07 $&   $152  $&    $0.1783    $    \\
-bfgsbacktrack       &   $4.390e+03 $&   $1.132e-14 $&   $5    $&    $0.0615    $    \\
-bfgswolfe           &   $4.390e+03 $&   $1.132e-14 $&   $5    $&    $0.0626    $    \\
+steepestbacktrack   &   $4.093e-03 $&   $- $&   $1.1486  $&$7579 $&$5793 $&$0    $       \\
+steepestwolfe       &   $2.296e-04 $&   $545  $&   $0.7112  $&$5418 $&$2716 $&$0    $       \\
+newtonbacktrack     &   $2.227e-04 $&   $49   $&   $0.0821  $&$99   $&$149  $&$49   $       \\
+newtonwolfe         &   $2.363e-04 $&   $45   $&   $0.0891  $&$142  $&$185  $&$45   $       \\
+trustregioncg       &   $6.026e-05 $&   $35   $&   $0.0857  $&$71   $&$72   $&$35   $       \\
+sr1trustregioncg    &   $1.490e-04 $&   $45   $&   $0.0926  $&$91   $&$182  $&$0    $       \\
+bfgsbacktrack       &   $1.981e-05 $&   $86   $&   $0.1142  $&$187  $&$439  $&$0    $       \\
+bfgswolfe           &   $1.087e-04 $&   $70   $&   $0.1371  $&$390  $&$532  $&$0    $       \\
  \end{tabular}
     \end{center}
 \end{table}
 
+\chapter{Conclusion and Experience}
 
-
-
-% This section may include tables, say of input parameter values and/or the results of your experiments.  An example table is the following.
-
-% \btable[ht]
-%   \centering
-%   \btabular{|r|l|}
-%     \hline
-%     7C0         & hexadecimal \\
-%     \cline{2-2}
-%     3700        & octal       \\
-%     \cline{2-2}
-%     11111000000 & binary      \\
-%     \hline
-%     \hline
-%     1984        & decimal     \\
-%     \hline
-%   \etabular
-%   \caption{The number 1984 written in various numerical bases}
-%   \label{1984}
-% \etable
-
-%*********
-% Chapter
-%*********
-\chapter{Conclusion}
-
-%The conclusion should summarize the findings described in the report.
-
-%**************
-% Bibliography
-%**************
 \bibliographystyle{plain}
 \bibliography{../references/references}
 
-%**********
-% Appendix
-%**********
-\appendix
-\chapter{Mathematical Details}\label{appendix}
-
-% The appendix may be used to include mathematical detail that is not necessary to include in the main body of the report.  It may also be used to provide the reader with instructions on running your code.  (Do NOT copy-and-paste your actual Matlab code in this document.)  If you do not need an appendix, then please erase this section in the \LaTeX\ code so this text does not appear.
+%\appendix
+%\chapter{Mathematical Details}\label{appendix}
 
 \end{document}

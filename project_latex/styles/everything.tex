@@ -1,0 +1,182 @@
+\usepackage{amsmath,amssymb, amsthm}
+%\usepackage{charter}
+%\usepackage{calc}
+
+\usepackage{fullpage}
+
+\usepackage{multirow}
+%\usepackage[cp1250]{inputenc}
+%\usepackage[T1]{fontenc}
+%\usepackage{calligra}
+%\usepackage[slovak]{babel}
+\usepackage{amsfonts}
+\usepackage{layout}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[dvips]{graphicx}
+\usepackage{url}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{verbatim}
+\usepackage{epsfig}
+\usepackage{xcolor}
+
+\PassOptionsToPackage{normalem}{ulem}
+\usepackage{ulem}
+
+\providecolor{added}{rgb}{0,0,1}
+\providecolor{deleted}{rgb}{1,0,0}
+%% Change tracking with ulem
+\newcommand{\added}[1]{{\color{added}{}#1}}
+\newcommand{\deleted}[1]{{\color{deleted}\sout{#1}}}
+
+\newcommand{\hlight}[2]{\noindent\colorbox{#1}{%
+    \parbox{\dimexpr\linewidth-2\fboxsep}% a box with line-breaks that's just wide enough
+        {#2%
+        }}}
+\newcommand\myeq[2]{\mathrel{\stackrel{\makebox[0pt]{\mbox{\normalfont\tiny #1}}}{#2}}}
+
+%\newcommand\myeq[2]{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily #1}}}{#2}}}        
+        
+
+ \newcommand{\xtilde}{\tilde x}
+ \newcommand{\vtilde}{\tilde v}
+ \newcommand{\Embb}{\E}
+ \newcommand{\xbar}{\bar x}
+ 
+\newcommand{\main}[1]{\footnotesize\textbf{#1}} 
+\newcommand{\todo}[1]{{\color{red}#1}}
+\newcommand{\note}[1]{{\color{red}#1}} 
+\newcommand\tagthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+
+\newcommand{\del}[1]{{\color{red}#1}}
+\newcommand{\asy}{\textsc{AsySPCD}}
+
+\let\la=\langle
+\let\ra=\rangle
+
+\newcommand{\inner}[1]{\langle#1\rangle}
+
+\newcommand{\st}{\;:\;}
+\newcommand{\ve}[2]{\langle #1 ,  #2 \rangle}
+
+\newcommand{\eqdef}{\stackrel{\text{def}}{=}}
+
+\newcommand{\ii}{{}^{(i)}}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Prob}{\mathbf{Prob}}
+\newcommand{\E}{\mathbf{E}}
+\newcommand{\blank}[1]{\{#1\}}
+
+
+\newcommand{\vc}[2]{#1^{(#2)}}
+\newcommand{\nc}[2]{{\color{red}\|#1\|_{(#2)}}}
+\newcommand{\ncs}[2]{\|#1\|^2_{(#2)}}
+\newcommand{\ncc}[2]{{\color{red}\|#1\|^*_{(#2)}}}
+\newcommand{\ls}[1]{{\color{red} \mathcal S(#1)}}
+\newcommand{\Rw}[2]{\mathcal R_{#1}(#2)}
+\newcommand{\Rws}[2]{\mathcal R^2_{#1}(#2)}
+\newcommand{\m}[1]{~\mbox{#1}~}
+
+\newcommand{\nbp}[2]{\|#1\|_{(#2)}}   % norm block primal
+\newcommand{\nbd}[2]{\|#1\|_{(#2)}^*} % norm block dual
+\newcommand{\norm}[1]{\|#1\|}
+
+\newcommand{\lf}{\mathcal L}
+\newcommand{\U}{U}
+\newcommand{\N}{N}
+\newcommand{\mc}[1]{\mathcal{#1}}
+
+\newcommand{\mLi}{{\color{red}m^{(i)}}}
+\newcommand{\gLi}{{\color{red}g^{(i)}}}
+%\newcommand{\TLi}{{\color{red}T_L^{(i)}}}
+\newcommand{\TLi}[1]{{\color{blue}T^{(#1)}}}
+
+\newcommand{\Lip}{L}
+
+\newcommand{\Rc}[1]{{\color{red}  \mathbf{RC}_{(#1)}}}
+\newcommand{\NRCDM}{{\color{red}NRCDM}\  }
+\newcommand{\nnz}[1]{{\color{red}\|#1\|_0}}
+% sets
+\DeclareMathOperator{\card}{card}       % cardinality of a set
+\DeclareMathOperator{\diam}{diam}       % diameter of a set
+\DeclareMathOperator{\MVEE}{MVEE}       % minim volume enclosing ellipsoid of a set
+\DeclareMathOperator{\vol}{vol}         % volume of a set
+
+\DeclareMathOperator{\prox}{prox}         
+
+% statistical
+\DeclareMathOperator{\Exp}{\mathbf{E}}           % expectation
+\DeclareMathOperator{\Cov}{Cov}         % covariance
+\DeclareMathOperator{\Var}{Var}         % variance
+\DeclareMathOperator{\Corr}{Corr}       % correlation
+
+% functions and operators
+\DeclareMathOperator{\signum}{sign}     % signum/sign of a scalar
+\DeclareMathOperator{\dom}{dom}         % domain
+\DeclareMathOperator{\epi}{epi}         % epigraph
+\DeclareMathOperator{\Ker}{null}        % nullspace/kernel
+\DeclareMathOperator{\nullspace}{null}  % nullpsace
+\DeclareMathOperator{\range}{range}     % range
+\DeclareMathOperator{\Image}{Im}        % image
+\DeclareMathOperator{\argmin}{argmin}        % argmin
+
+% topology
+\DeclareMathOperator{\interior}{int}    % interior
+\DeclareMathOperator{\ri}{rint}         % relative interior
+\DeclareMathOperator{\rint}{rint}       % relative interior
+\DeclareMathOperator{\bdry}{bdry}       % boundary
+\DeclareMathOperator{\cl}{cl}           % closure
+
+% vectors, matrices
+\DeclareMathOperator{\linspan}{span}
+\DeclareMathOperator{\linspace}{linspace}
+\DeclareMathOperator{\cone}{cone}
+
+\DeclareMathOperator{\tr}{tr}           % trace
+\DeclareMathOperator{\rank}{rank}       % rank
+\DeclareMathOperator{\conv}{conv}       % convex hull
+\DeclareMathOperator{\Diag}{Diag}       % Diag(v) = diagonal matrix with v_i on the diagonal
+\DeclareMathOperator{\diag}{diag}       % diag(D) = the diagonal vector of matrix D
+
+\DeclareMathOperator{\Arg}{Arg}         % Argument
+
+%\renewcommand{\qedsymbol}{\ding{114}}
+
+
+\newtheorem{assumption}{Assumption}
+\newtheorem{lemma}{Lemma}
+\newtheorem{algorithms}{Algorithm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{plain}
+
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{lem}[theorem]{Lemma}
+\newtheorem{claim}[theorem]{Claim}
+%\newtheorem{remark}[theorem]{Remark}
+
+\theoremstyle{definition}
+
+\newtheorem{exercise}[theorem]{Exercise}
+
+\newtheorem{rem}[theorem]{Remark}
+\newtheorem{que}[theorem]{Question}
+\newtheorem{definition}[theorem]{Definition}
+
+\newcommand*{\starnr}{\stepcounter{equation}\tag{\theequation}}
+\makeatletter
+\newenvironment{Salign}
+  {\start@align\@ne\st@rredtrue\m@ne}
+  {\starnr\endalign}
+\makeatother

@@ -26,12 +26,21 @@ end
 % Compute descent direction by cg method
 d = feval('cg',g,i,D,H);
 
+
+% if (norm(d) <= 1e-4)
+%     fprintf('  %f', norm(D));
+%     return;
+% end
+
 % Update global count number
 COUNTF = COUNTF + 1;
 f1 = feval(p,x+d,0);
+flager = 1;
 
+fprintf('bool  %i', -g'*d-d'*H*d)
 % Calculate decrease ratio between original function and approximate function
 rho = (f-f1)/(-g'*d-d'*H*d);
+%fprintf('   %f',rho);
 
 % If decrease ratio is less than the first trust region parameter
 if rho <= i.c1tr
@@ -58,7 +67,7 @@ if flager == 1
     f = f1;
     % Update global count number
     COUNTG = COUNTG + 1;
-    g1 = feval(p,x,1);
+    g1 = feval(p,x+d,1);
     
     % Choose subproblem solver (to use sr1cg)
     if strcmp(sea,'sr1cg')
