@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex project"] 1430196808 "project.aux" "project.bbl" "project" 1430402169
+["bibtex project"] 1430520829 "project.aux" "project.bbl" "project" 1430520832
   "../references/references.bib" 1333490994 265 6bcc228e91da57f0584defceedd8df76 ""
   "/usr/local/texlive/2014/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "project.aux" 1430196811 5395 bd6fc822920478066585da74ba506012 ""
+  "project.aux" 1430520832 5426 1d3b08595247e77e0995096bbf8491f2 ""
   "project.bcf" 0 -1 0 ""
   (generated)
   "project.blg"
   "project.bbl"
-["pdflatex"] 1430196809 "project.tex" "project.pdf" "project" 1430402169
+["pdflatex"] 1430520830 "project.tex" "project.pdf" "project" 1430520832
   "../images/global_min.png" 1428891112 97384 3ab417f16421ecefd11050c5f21ea8b1 ""
   "../images/wolfe1.png" 1429924652 160676 8d16f3414edda3273ca0b07f4cfff98d ""
   "../images/wolfe2.png" 1429926443 185540 d15f1c2fafe2a88b9d7c4c39881d8cfc ""
@@ -51,16 +51,16 @@
   "/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/grfext.sty" 1335995445 7075 bd0c34fbf1ae8fd1debd2a554e41b2d5 ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty" 1335995445 22417 c74ff4af6a1aa2b65d1924020edbbe11 ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/pdftex-def/pdftex.def" 1306616590 55368 3c8a0d99822330f2dfabc0dfb09ce897 ""
-  "project.aux" 1430196811 5395 bd6fc822920478066585da74ba506012 ""
-  "project.bbl" 1430196809 243 b7dac1640242bef20bb0677498e45145 "bibtex project"
-  "project.lof" 1430196811 389 8e8107453a151bc9b1bef81060263011 ""
-  "project.lot" 1430196811 599 bd59bb48b3f2e77338873114c9f91445 ""
-  "project.tex" 1430402165 31607 f704140ad29a2bcccd30892c3b72db32 ""
-  "project.toc" 1430196811 1215 6de07513cfa1a3a42230cfc584efb3db ""
+  "project.aux" 1430520832 5426 1d3b08595247e77e0995096bbf8491f2 ""
+  "project.bbl" 1430520830 243 b7dac1640242bef20bb0677498e45145 "bibtex project"
+  "project.lof" 1430520832 389 8e8107453a151bc9b1bef81060263011 ""
+  "project.lot" 1430520832 599 930accc45df147eb175b6d5d4468c685 ""
+  "project.tex" 1430520826 40900 f128db368af4736d68c26b38f6e4e747 ""
+  "project.toc" 1430520832 1215 9ead50401971a039b38914e21efd40f5 ""
   (generated)
   "project.lof"
-  "project.toc"
   "project.log"
-  "project.aux"
   "project.lot"
+  "project.toc"
   "project.pdf"
+  "project.aux"

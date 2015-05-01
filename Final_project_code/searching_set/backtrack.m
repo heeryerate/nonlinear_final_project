@@ -6,9 +6,11 @@ function [a,g] = backtrack(p,x,d,f,g,H,i)
 % Description : Calculate step-size along a descent direction d
 % Input       : p ~ problem handle
 %               x ~ current point
+%               f, g, H ~ function value, gradient value and Hessian matrix at current point
 %               d ~ current descent direction
 %               i ~ parameter set
 % Output      : a ~ step-size along a descent direction
+%                  : g ~ updated gradient value 
 
 % Set initial step-size
 a0 = 1;
@@ -22,6 +24,7 @@ rho = i.shrinkbacktrack;
 % Set count of iteration
 count = 0;
 
+% Reduce gradient value evaluation
 gphi0 = g'*d;
 
 while 1
@@ -39,11 +42,17 @@ while 1
     % Otherwise, reject and shrink step-size
     a0 = rho*a0;
 end
+
+% Update gradient value
 g = feval(p,x+a*d,1);
+
+% Update global counter for gradient evaluation
 global COUNTG;
 COUNTG = COUNTG + 1;
+
 end
 
+% Function to calculate the function value of \phi
 function phivalue = phi(p,x,d,a)
 
 % Increment global counter

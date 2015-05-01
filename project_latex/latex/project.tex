@@ -249,7 +249,7 @@ Another popular approach is to drop curvature condition \eqref{eq:wolfe_curvatur
 \end{algorithmic}
 \end{algorithm}
 
-Global convergence result for line search methods with respect to steepest descent method is given in the appendix. 
+Global convergence result for line search methods with respect to steepest descent method is proved under some mild assumption. 
 
 \section{Quasi-newton method}\label{sec: Quasi-newton method}
 Another approach to derive descent direction is to use Quasi-newton method, which only depends on only first derivatives. Actually, what we do in Quasi-newton method is to approximate Hessian matrix by first derivatives instead of computing accurate Hessian matrix directly, which is sometimes computational expensive.
@@ -492,25 +492,28 @@ Numerical results with initial point $0\mathbf{e}$:
     \caption{Rosenbrock, with initial $0\mathbf{e}$}
     \label{tab:Rosenbrock_initial}
     \begin{center}
-        \begin{tabular}{l|cccccc}
-\textbf{ROSENBROCK}&    gNorm       &   Iter.  &   Cputime   &   feval&geval&Hevel\\
+        \begin{tabular}{l|ccccccc}
+\textbf{ROSENBROCK}&    gNorm       &   Iter.  &   Cputime   &   feval&geval&Hevel&Linsolved\\
 \hline
-steepestbacktrack   &   $1.000e-01 $&   $- $&   $0.5183  $&$10469$&$7238 $&$0    $       \\
-steepestwolfe       &   $8.583e-05 $&   $-$&   $0.5777  $&$10528$&$5048 $&$0    $       \\
-newtonbacktrack     &   $7.406e-07 $&   $13   $&   $0.0475  $&$33   $&$44   $&$13   $       \\
-newtonwolfe         &   $3.116e-10 $&   $15   $&   $0.0588  $&$57   $&$66   $&$15   $       \\
-trustregioncg       &   $1.363e-06 $&   $45   $&   $0.0674  $&$91   $&$92   $&$45   $       \\
-sr1trustregioncg    &   $2.174e-08 $&   $69   $&   $0.0775  $&$139  $&$278  $&$0    $       \\
-bfgsbacktrack       &   $3.416e-08 $&   $23   $&   $0.0529  $&$63   $&$125  $&$0    $       \\
-bfgswolfe           &   $2.455e-07 $&   $21   $&   $0.0577  $&$83   $&$133  $&$0    $       \\
+steepestbacktrack   &   $1.000e-01 $&   $- $&   $0.3856  $&$6236 $&$1002 $&$0    $&$0    $       \\
+steepestwolfe       &   $1.010e-01 $&   $- $&   $0.8075  $&$18629$&$2071 $&$0    $&$0    $       \\
+newtonbacktrack     &   $7.406e-07 $&   $13   $&   $0.0544  $&$30   $&$14   $&$13   $&$13   $       \\
+newtonwolfe         &   $3.652e-10 $&   $14   $&   $0.0500  $&$49   $&$19   $&$14   $&$14   $       \\
+trustregioncg       &   $1.019e-06 $&   $54   $&   $0.0784  $&$55   $&$32   $&$32   $&$0    $       \\
+sr1trustregioncg    &   $8.581e-07 $&   $68   $&   $0.0642  $&$69   $&$42   $&$0    $&$0    $       \\
+bfgsbacktrack       &   $3.416e-08 $&   $23   $&   $0.0530  $&$55   $&$24   $&$0    $&$23   $       \\
+bfgswolfe           &   $6.357e-07 $&   $21   $&   $0.0580  $&$76   $&$27   $&$0    $&$21   $       \\
      \end{tabular}
     \end{center}
 \end{table}
 
+Rosenbrock function is supposed to be create to illustrate the inefficiency of steepest descent method. Especially, when current point lies in some area nearby the optimal point $(1,1)$, the convergent rate decrease dramatically. By checking its contour, which we call banana shape, it shows that in such a long and narrow arrow, steepest descent direction are roughly orthogonal with each other. This fact lead to low convergence result. However, with respect to other algorithms, their performance are somehow similar.  They all lead to a minimizer in roughly same iterations.
+
+
 \textbf{(2) Genhumps }
 
 Objective function: 
-\begin{equation}
+\begin{equation}\label{genhumps}
     f(x) = \sum_{i=1}^4(\sin(2x_i)^2\sin(2x_{i+1})^2+0.05(x_i^2+x_{i+1}^2)).
 \end{equation}
 
@@ -524,20 +527,22 @@ Numerical results with initial point $\mathbf{e}$:
     \caption{Genhumps, with initial $\mathbf{e}$}
     \label{tab:Genhumps_initial}
     \begin{center}
-        \begin{tabular}{l|cccccc}
-\textbf{GENHUMPS}&  gNorm       &   Iter.  &   Cputime   &   feval&geval&Hevel\\
+        \begin{tabular}{l|ccccccc}
+\textbf{GENHUMPS}&  gNorm       &   Iter.  &   Cputime   &   feval&geval&Hevel&Linsolved\\
 \hline
-steepestbacktrack   &   $3.589e-06 $&   $102  $&   $0.1373  $&$317  $&$364  $&$0    $       \\
-steepestwolfe       &   $4.275e-06 $&   $131  $&   $0.1380  $&$487  $&$562  $&$0    $       \\
-newtonbacktrack     &   $2.716e-06 $&   $18   $&   $0.0545  $&$39   $&$57   $&$18   $       \\
-newtonwolfe         &   $5.305e-08 $&   $12   $&   $0.0696  $&$46   $&$55   $&$12   $       \\
-trustregioncg       &   $4.060e-06 $&   $34   $&   $0.0685  $&$69   $&$70   $&$34   $       \\
-sr1trustregioncg    &   $2.194e-06 $&   $65   $&   $0.0919  $&$131  $&$262  $&$0    $       \\
-bfgsbacktrack       &   $3.330e-06 $&   $29   $&   $0.0642  $&$67   $&$151  $&$0    $       \\
-bfgswolfe           &   $3.543e-06 $&   $37   $&   $0.0746  $&$150  $&$243  $&$0    $       \\
+steepestbacktrack   &   $3.589e-06 $&   $102  $&   $0.1166  $&$261  $&$103  $&$0    $&$0    $       \\
+steepestwolfe       &   $3.884e-06 $&   $145  $&   $0.1051  $&$572  $&$197  $&$0    $&$0    $       \\
+newtonbacktrack     &   $2.716e-06 $&   $18   $&   $0.0491  $&$38   $&$19   $&$18   $&$18   $       \\
+newtonwolfe         &   $1.742e-07 $&   $12   $&   $0.0591  $&$43   $&$16   $&$12   $&$12   $       \\
+trustregioncg       &   $1.841e-06 $&   $64   $&   $0.0778  $&$65   $&$40   $&$40    $&$0    $       \\
+sr1trustregioncg    &   $1.414e-06 $&   $67   $&   $0.0670  $&$68   $&$43   $&$0    $&$0    $       \\
+bfgsbacktrack       &   $3.330e-06 $&   $29   $&   $0.0613  $&$63   $&$30   $&$0    $&$29   $       \\
+bfgswolfe           &   $2.921e-06 $&   $19   $&   $0.1469  $&$66   $&$23   $&$0    $&$19   $       \\
  \end{tabular}
     \end{center}
 \end{table}
+
+Genhumps function is much nicer than Rosenbrock. By looking at the formula \eqref{genhumps}, in the neighbor of accurate minimizer, $\sin(x)\sim x$, the function is suppose to have good convexity. Actually, it can be shown in the numerical experiment, all algorithms show consistent performance. Compared with all those algorithms, newtonbacktrack and newtonwolfe are much better, based on number of iteration and number of function evaluation.
 
 \textbf{(3) Quadratic }
 
@@ -558,20 +563,22 @@ Numerical results with initial point $0\mathbf{e}$:
     \caption{Quadratic, with initial $0\mathbf{e}$}
     \label{tab:Quadratic_initial}
     \begin{center}
-        \begin{tabular}{l|cccccc}
-\textbf{QUADRATIC}& gNorm       &   Iter.  &   Cputime   &   feval&geval&Hevel\\
+        \begin{tabular}{l|ccccccc}
+\textbf{QUADRATIC}& gNorm       &   Iter.  &   Cputime   &   feval&geval&Hevel&Linsolved\\
 \hline
-steepestbacktrack   &   $1.537e-06 $&   $18   $&   $0.1445  $&$37   $&$56   $&$0    $       \\
-steepestwolfe       &   $1.537e-06 $&   $18   $&   $0.1375  $&$55   $&$74   $&$0    $       \\
-newtonbacktrack     &   $4.591e-16 $&   $1    $&   $0.0538  $&$3    $&$5    $&$1    $       \\
-newtonwolfe         &   $4.591e-16 $&   $1    $&   $0.0607  $&$4    $&$6    $&$1    $       \\
-trustregioncg       &   $6.004e-07 $&   $28   $&   $0.1554  $&$57   $&$58   $&$28   $       \\
-sr1trustregioncg    &   $2.463e-06 $&   $21   $&   $0.1376  $&$43   $&$86   $&$0    $       \\
-bfgsbacktrack       &   $2.952e-06 $&   $10   $&   $0.0992  $&$21   $&$52   $&$0    $       \\
-bfgswolfe           &   $2.952e-06 $&   $10   $&   $0.1170  $&$31   $&$62   $&$0    $       \\
+steepestbacktrack   &   $1.537e-06 $&   $18   $&   $0.1983  $&$37   $&$19   $&$0    $&$0    $       \\
+steepestwolfe       &   $1.537e-06 $&   $18   $&   $0.0968  $&$55   $&$19   $&$0    $&$0    $       \\
+newtonbacktrack     &   $4.591e-16 $&   $1    $&   $0.0665  $&$3    $&$2    $&$1    $&$1    $       \\
+newtonwolfe         &   $4.591e-16 $&   $1    $&   $0.0483  $&$4    $&$2    $&$1    $&$1    $       \\
+trustregioncg       &   $4.949e-11 $&   $9    $&   $0.0737  $&$10   $&$7    $&$7    $&$0    $       \\
+sr1trustregioncg    &   $6.036e-07 $&   $15   $&   $0.0681  $&$16   $&$10   $&$0    $&$0    $       \\
+bfgsbacktrack       &   $2.952e-06 $&   $10   $&   $0.0969  $&$21   $&$11   $&$0    $&$10   $       \\
+bfgswolfe           &   $2.952e-06 $&   $10   $&   $0.0923  $&$31   $&$11   $&$0    $&$10   $       \\
  \end{tabular}
     \end{center}
 \end{table}
+
+Quadratic function turns to be the most well-defined function. All algorithm have good performance when solving this problem, and no surprisingly, by using newton method, it always give the accurate result in one iteration with one Hessian evaluation. 
 
 \textbf{(4) Leastsquares }
 
@@ -592,22 +599,66 @@ Numerical results with initial point $(0,0,0,1)^T$:
     \caption{Leastsquares, with initial $(0,0,0,1)^T$}
     \label{tab:Leastsquares_initial}
     \begin{center}
-        \begin{tabular}{l|cccccc}
-\textbf{LEASTSQUARES}&  gNorm       &   Iter.  &   Cputime   &   feval&geval&Hevel\\
+        \begin{tabular}{l|ccccccc}
+\textbf{LEASTSQUARES}&  gNorm       &   Iter.  &   Cputime   &   feval&geval&Hevel&Linsolved\\
 \hline
-steepestbacktrack   &   $4.093e-03 $&   $- $&   $1.1486  $&$7579 $&$5793 $&$0    $       \\
-steepestwolfe       &   $2.296e-04 $&   $545  $&   $0.7112  $&$5418 $&$2716 $&$0    $       \\
-newtonbacktrack     &   $2.227e-04 $&   $49   $&   $0.0821  $&$99   $&$149  $&$49   $       \\
-newtonwolfe         &   $2.363e-04 $&   $45   $&   $0.0891  $&$142  $&$185  $&$45   $       \\
-trustregioncg       &   $6.026e-05 $&   $35   $&   $0.0857  $&$71   $&$72   $&$35   $       \\
-sr1trustregioncg    &   $1.490e-04 $&   $45   $&   $0.0926  $&$91   $&$182  $&$0    $       \\
-bfgsbacktrack       &   $1.981e-05 $&   $86   $&   $0.1142  $&$187  $&$439  $&$0    $       \\
-bfgswolfe           &   $1.087e-04 $&   $70   $&   $0.1371  $&$390  $&$532  $&$0    $       \\
+steepestbacktrack   &   $4.093e-03 $&   $- $&   $0.5644  $&$4791 $&$1002 $&$0    $&$0    $       \\
+steepestwolfe       &   $1.185e-02 $&   $- $&   $1.3112  $&$13179$&$2054 $&$0    $&$0    $       \\
+newtonbacktrack     &   $2.227e-04 $&   $49   $&   $0.0764  $&$99   $&$50   $&$49   $&$49   $       \\
+newtonwolfe         &   $2.366e-04 $&   $46   $&   $0.0710  $&$143  $&$49   $&$46   $&$46   $       \\
+trustregioncg       &   $2.089e-04 $&   $41   $&   $0.0676  $&$42   $&$42   $&$42   $&$0    $       \\
+sr1trustregioncg    &   $1.833e-04 $&   $37   $&   $0.0593  $&$38   $&$24   $&$0    $&$0    $       \\
+bfgsbacktrack       &   $1.981e-05 $&   $86   $&   $0.0848  $&$180  $&$87   $&$0    $&$86   $       \\
+bfgswolfe           &   $2.227e-05 $&   $4    $&   $0.0481  $&$28   $&$8    $&$0    $&$4    $       \\
  \end{tabular}
     \end{center}
 \end{table}
 
+Leastsquares suppose to be a not well-conditioned function, by some points, my programming can not work well, even go divergence. The reason why it happens should be a huge gradient Lipschitz constant during some area. The gradient value changes dramatically at some nearby point. The other reason might be a ill-conditioned Hessian matrix at some point. 
+
+Beyond those four experiments, I also test a lot of starting points to test all of these eight algorithms with various parameters. I'll leave conclusion to the next chapter and say few words about the number of function evaluation (function value, gradient value and Hessian). Actually, by proper implementation, in backtracking linear search related method, the minimum number of gradient value evaluation should be exactly greater than iteration by $1$. For trust region method, since we use cg method to solve subproblem, there is no need to compute gradient value in solving subproblem. And if we reject the direction, there is no update on $x$, we can simply keep the function information at current point. It will decrease the number of gradient value evaluation. Thus, it's reasonable to see the gradient value evaluation are less than iteration. However, since we always need calculate function value at next point to decide whether should we reject or accept the direction. It supposed to be one more time of function value evaluation than iteration on trust region type method. 
+
+Talking about Hessian evaluation, we need calculate Hessian matrix only in newton method and trust region with cg method. For linear systems solve, it only happened in bfgs method and newton method, which can be found in those four tableau, where the number of linear system solve is exactly same with the number of iteration.
+
 \chapter{Conclusion and Experience}
+
+In this project, I implement eight algorithms to solve several test problems. To conduct the conclusion, first I'll say as expected there is no algorithm can always solve problems efficiently. In general, specific algorithm which works pretty well in a problem will possibly failed when solve other problems. Even when solve the same problems at different initial points, the final results may be totally different. One interesting thing to mention is the parameters chosen, in general, are not so crucial. For a roughly stable algorithm, by small change of parameters, numerical results are not affect too much. Thus, the efficiency of an algorithm are more related to the structure of the problems. Meanwhile, with respect to different algorithms, there are different corresponding ill-conditional and well-conditional problems. Some detailed discussion is stated as follows.
+
+\begin{center}
+    \textbf{Numerical performance}
+\begin{itemize}
+    \item As I claimed in the first paragraph, there is no algorithm that can always beat others in general. 
+    \item I may say that steepest descent method with line search method is weaker than others in majority test problems. To perform better, a well-conditional problem should be provided. However, steepest descent is tend to be the most stable algorithm, not enough to obtain the accurate result, but still much powerful to handle all kinds of problems.
+    \item With respect to newton direction type method, it shows great performance when in the case that all others can somehow derive the correct results. To have excellent performance, it should expect a good Hessian conditions. And as we known, practically, the performance of this method depends on the initial point choosing. 
+    \item In terms of BFGS method, the performance is relatively stable, since it is not so much dependent on Hessian matrix. Under same condition, BFGS method is slight weaker that newton method.
+    \item The trust region method is relatively sensitive on parameters selecting. And it performance also depends much on problem. For problems which are changing dramatically, it shows bad performance, since in this case, the radius may decrease to be very close to $0$ which make the ration (real function value reduction over estimated function value reduction) even larger, which is unstable when concern at numerical issue. 
+    \item About line search method, wolfe type method is more stable than backtracking strategy, since for backtracking, the strategy is to reduce initial step-size till it satisfies sufficient condition, while in wolfe condition, it is also necessary to satisfies curvature condition which will reject some too small step-size. 
+\end{itemize}
+\end{center}
+
+\begin{center}
+    \textbf{Coding complexity}
+    \begin{itemize}
+        \item With respect to coding complexity, it's obvious that steepest descent method is easiest among all the algorithms. This might be reasonable when turns to its performance, since there are less control on the algorithm.
+        \item Talking about newton type method, the implementation is also simple, while we need special concern about the Hessian matrix since it effect it performance a lot. Different strategy can be used to modify a ill-conditional Hessian matrix.
+        \item For BFGS method, more concern happen. Except for regular implementation, we need also pay attention on decrease the number of gradient evaluation to make it run cheaply. Also damped BFGS is applied on making sure the positive definiteness of the BFGS method.
+        \item In term of trust region method, which is the most complex implementation in this project, we need more concern since not only to develop code to solve subproblem but also need tricks to save computation. 
+        \item About line search method, wolfe type method is more complex than backtracking strategy, since for backtracking, we can only evaluate gradient value once and using a simply loop to decide a proper step-size. While when turns to wolf condition, not only we need verify two conditions and have more amount of evaluation, also we need choose a proper zoom function to find the step-size and more parameters to decide.
+    \end{itemize}
+\end{center}
+
+\begin{center}
+    \textbf{Summery}
+    \begin{itemize}
+        \item Obvious result is that the more sophisticated designation of the algorithm it shows, the more stable performance it has. However, I can't say the same observation with respect to their performance. 
+        \item For all coder, I'll recommend newton method or steepest method with backtracking line search strategy, since they are cheaper to implement and in general, it will obtain good result, either stable or fast.
+        \item To recommend to an expert coder, I prefer to suggest to use trust region method and BFGS method with wolfe line search strategy, since such algorithms are more flexible to accept user set-up. Also variety choices can be made to adjust the efficiency of algorithms.
+        \item If someone concern more on the expense of evaluation of Hessian matrix, I'll suggest them to use BFGS method and trust region method with SR1 approximate matrix cg method. Especially, when it's expensive to obtain Hessian matrix.
+    \end{itemize}
+\end{center}
+
+
+Begin with passion, stuck in debugging and meanwhile find that there are always something can be done to improve this program even it nicely give me a correct result. This should be a real feeling of finishing this project. Sometimes, when I felt that my code runs well and suddenly some others came to me and said: Hey, buddy, just try this initial point. Occasionally, it made me sad because sometimes the program crashed and I had to go back to check if anything wrong somewhere. But, fortunately, it finally finished and seems show some reasonable results always. I'm glad to see this and look forward to test your secret function! 
 
 \bibliographystyle{plain}
 \bibliography{../references/references}

@@ -1,5 +1,17 @@
 function [a,g] = wolfe(p,x,d,f,g,H,i)
 
+% function  [a,g] = wolfe(p,x,d,f,g,H,i)
+%
+% Author      : Xi He
+% Description : Calculate step-size along a descent direction d
+% Input       : p ~ problem handle
+%               x ~ current point
+%               f, g, H ~ function value, gradient value and Hessian matrix at current point
+%               d ~ current descent direction
+%               i ~ parameter set
+% Output      : a ~ step-size along a descent direction
+%                  : g ~ updated gradient value 
+
 % Set initial parameters for wolfe-conditions
 a0 = 0;
 a1 = 1;
@@ -33,7 +45,7 @@ while 1
     end
     
     % If a_i is almost same as amax, output a as a_i
-    if a1 >= (1-1e-4)*amax
+    if a1 >= (1-1e-10)*amax
         a = a1;
         g = gf;
         break;

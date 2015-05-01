@@ -6,9 +6,10 @@ function [d,H] = bfgs(p,x,f,g,H,i)
 % Description : Calculate bfgs approximate Hessian matrix and corresponding descent direction
 % Input       : p ~ problem handle
 %               x ~ current point
+%               f, g, H ~ function value, gradient value and bfgs matrix at current point
 %               i ~ parameter set
-%               H ~ bfgs approximate Hessian matrix of last iteration
 % Output      : d ~ descent direction at point x
+%               H ~ bfgs matrix at current point 
 % H ~ next bfgs approximate Hessian matrix
 
 % Keep bfgs approximate Hessian matrix positive definite
@@ -22,6 +23,8 @@ end
 % Calculate bfgs descent direction of current point x
 d = -H\g;
 
+% Update number of linear system solved
 global COUNTS;
 COUNTS = COUNTS + 1;
+
 end

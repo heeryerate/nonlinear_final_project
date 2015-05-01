@@ -1,5 +1,19 @@
 function H = Hessianupdate(p,s,x,d,f,g,g1,H,i)
 
+% function H = Hessianupdate(p,s,x,d,f,g,g1,H,i)
+%
+% Author      : Xi He
+% Description : Calculate step-size along a descent direction d
+% Input       : p ~ problem handle
+%               x ~ current point
+%               s ~ difference between two nearby point
+%               g1 ~ gradient value at current point
+%               f, g, H ~ function value, gradient value and bfgs matrix at previous point
+%               d ~ current descent direction
+%               i ~ parameter set
+% Output      :  H ~ updated bfgs matrix
+
+
 % Calculation difference between current point gradient and previous point gradient
 y = g1-g;
 

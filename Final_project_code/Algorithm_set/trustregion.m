@@ -7,8 +7,8 @@ function [x,f,g,D,H] = trustregion(sea,p,x,g,f,H,D,i)
 % Input       : sea ~ subproblem solve handle (cg or sr1cg)
 % p ~ objection function handle
 %               x ~ current point
-%               i ~ parameter se
-%               H ~ (approximate) Hessian matrix at point x
+%               i ~ parameter set
+%               f, g, H ~ function value, gradient value and Hessian matrix at current point
 %               D ~ trust region radius at point x
 % Output      : x ~ new x value
 %               D ~ new trust region radius
@@ -19,6 +19,7 @@ global COUNTF;
 global COUNTG;
 global COUNTH;
 
+% Calculate Hessian matrix for cg method
 if strcmp(sea,'cg')
     H = feval(p,x,2);
 end
@@ -36,7 +37,7 @@ rho = (f-f1)/(-g'*d-d'*H*d);
 % If decrease ratio is less than the first trust region parameter
 if rho <= i.c1tr
     
-    % Shrink trust region ratio to half
+    % Shrink trust region ratio to half, flager is a bool variable to decide whether to accept d
     D = D*i.shrinkradius;
     flager = 0;
     
@@ -54,16 +55,22 @@ elseif rho > i.c2tr
     flager = 1;
 end
 
+% If we decide to accept direction d
 if flager == 1
+
+    % Update function value
     f = f1;
+
     % Update global count number
     COUNTG = COUNTG + 1;
     g1 = feval(p,x,1);
     
-    % Choose subproblem solver (to use sr1cg)
+    % Choose subproblem solver (to use sr1cg) and update SR1 matrix
     if strcmp(sea,'sr1cg')
         H = sr1update(p,d,x,f,g,g1,H,i);
     end
+    
+    %   Update the gradient value
     g = g1;
 end
 end

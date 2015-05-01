@@ -14,5 +14,5 @@
 \contentsline {section}{\numberline {4.2}Conjugate Gradient Method}{13}
 \contentsline {section}{\numberline {4.3}Trust Region Subproblem with CG Method}{14}
 \contentsline {chapter}{\numberline {5}Numerical Results}{16}
-\contentsline {chapter}{\numberline {6}Conclusion and Experience}{19}
-\contentsline {chapter}{Bibliography}{20}
+\contentsline {chapter}{\numberline {6}Conclusion and Experience}{20}
+\contentsline {chapter}{Bibliography}{22}

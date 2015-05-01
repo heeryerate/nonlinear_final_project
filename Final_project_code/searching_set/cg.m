@@ -13,6 +13,14 @@ function d = cg(g,i,D,H);
 % Set initial vector to be zero
 d = zeros(size(g));
 
+% Modify Hessian matrix to be well-conditional
+n = length(g);
+
+a = min(eig(H));
+if a <= i.posdeftol
+    H = H + (i.mineigtol-a)*eye(n);
+end
+
 % Evaluation residue
 r = H*d+g;
 
